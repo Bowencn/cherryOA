@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 6vmin;
   pointer-events: none;
 }
 
@@ -35,4 +35,25 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* antd */
+#components-layout-demo-responsive .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.site-layout-sub-header-background {
+  background: #fff;
+}
+
+.site-layout-background {
+  background: #fff;
+}
+.card-icon {
+  font-size: 42px;
+  border: 5px solid #fff;
+  border-radius: 90px;
+  padding: 12px;
 }
