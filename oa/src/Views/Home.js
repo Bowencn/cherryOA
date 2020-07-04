@@ -10,92 +10,134 @@ import { GroupedColumn, Pie } from "@ant-design/charts";
 export default function Home() {
   const data = [
     {
-      name: "London",
-      月份: "Jan.",
-      月均降雨量: 18.9,
+      name: "满意",
+      月份: "一月",
+      月均降雨量: 18,
     },
     {
-      name: "London",
-      月份: "Feb.",
-      月均降雨量: 28.8,
+      name: "满意",
+      月份: "二月",
+      月均降雨量: 28,
     },
     {
-      name: "London",
-      月份: "Mar.",
-      月均降雨量: 39.3,
+      name: "满意",
+      月份: "三月",
+      月均降雨量: 39,
     },
     {
-      name: "London",
-      月份: "Apr.",
-      月均降雨量: 81.4,
+      name: "满意",
+      月份: "四月",
+      月均降雨量: 81,
     },
     {
-      name: "London",
-      月份: "May",
+      name: "满意",
+      月份: "五月",
       月均降雨量: 47,
     },
     {
-      name: "London",
-      月份: "Jun.",
-      月均降雨量: 20.3,
+      name: "满意",
+      月份: "六月",
+      月均降雨量: 20,
     },
     {
-      name: "London",
-      月份: "Jul.",
+      name: "满意",
+      月份: "七月.",
       月均降雨量: 24,
     },
     {
-      name: "London",
-      月份: "Aug.",
-      月均降雨量: 35.6,
+      name: "满意",
+      月份: "八月",
+      月均降雨量: 35,
     },
     {
-      name: "Berlin",
-      月份: "Jan.",
-      月均降雨量: 12.4,
+      name: "满意",
+      月份: "九月",
+      月均降雨量: 40,
     },
     {
-      name: "Berlin",
-      月份: "Feb.",
-      月均降雨量: 23.2,
+      name: "满意",
+      月份: "十月",
+      月均降雨量: 45,
     },
     {
-      name: "Berlin",
-      月份: "Mar.",
-      月均降雨量: 34.5,
+      name: "满意",
+      月份: "十一月",
+      月均降雨量: 50,
     },
     {
-      name: "Berlin",
-      月份: "Apr.",
-      月均降雨量: 99.7,
+      name: "满意",
+      月份: "十二月",
+      月均降雨量: 30,
     },
     {
-      name: "Berlin",
-      月份: "May",
-      月均降雨量: 52.6,
+      name: "不满意",
+      月份: "一月",
+      月均降雨量: 12,
     },
     {
-      name: "Berlin",
-      月份: "Jun.",
-      月均降雨量: 35.5,
+      name: "不满意",
+      月份: "二月",
+      月均降雨量: 23,
     },
     {
-      name: "Berlin",
-      月份: "Jul.",
-      月均降雨量: 37.4,
+      name: "不满意",
+      月份: "三月",
+      月均降雨量: 34,
     },
     {
-      name: "Berlin",
-      月份: "Aug.",
-      月均降雨量: 42.4,
+      name: "不满意",
+      月份: "四月",
+      月均降雨量: 99,
+    },
+    {
+      name: "不满意",
+      月份: "五月",
+      月均降雨量: 52,
+    },
+    {
+      name: "不满意",
+      月份: "六月",
+      月均降雨量: 35,
+    },
+    {
+      name: "不满意",
+      月份: "七月.",
+      月均降雨量: 37,
+    },
+    {
+      name: "不满意",
+      月份: "八月",
+      月均降雨量: 42,
+    },
+    {
+      name: "不满意",
+      月份: "九月",
+      月均降雨量: 36,
+    },
+    {
+      name: "不满意",
+      月份: "十月",
+      月均降雨量: 38,
+    },
+    {
+      name: "不满意",
+      月份: "十一月",
+      月均降雨量: 30,
+    },
+    {
+      name: "不满意",
+      月份: "十二月",
+      月均降雨量: 20,
     },
   ];
   const config = {
     height: 770,
+    renderer: "svg",
     title: {
       visible: true,
       text: "1-12月客户满意度图标",
       style: {
+        fontSize: 18,
         fill: "#fff",
       },
     },
@@ -104,12 +146,12 @@ export default function Home() {
       alignTo: "top",
       text: "统计调查人数：3000(人)",
       style: {
-        fontSize: 12,
+        fontSize: 14,
         fill: "#fff",
       },
     },
     legend: {
-      text: { style: { fill: "#fff" } },
+      text: { style: { fill: "#fff", fontSize: 16 } },
     },
     forceFit: true,
     data,
@@ -118,32 +160,47 @@ export default function Home() {
     yAxis: {
       min: 0,
       title: {
-        style: { fill: "#fff" },
+        visible: false,
+        style: {
+          fontSize: 14,
+          fill: "#fff",
+        },
       },
-      line: {
+      label: {
+        visible: true,
+        formatter: (angleField) => {
+          return angleField + "%";
+        },
+        style: {
+          fontSize: 14,
+          fill: "#fff",
+        },
+      },
+      grid: {
+        visible: true,
         style: {
           fill: "#fff",
         },
       },
-      tickLine: { style: { fill: "#fff", visible: true } },
-      label: { style: { fill: "#fff" } },
-      grid: { style: { fill: "#fff" } },
     },
     xAxis: {
       min: 0,
       title: {
-        style: { fill: "#fff" },
+        visible: false,
       },
-      line: {
+      label: {
+        style: {
+          fontSize: 14,
+          fill: "#fff",
+        },
+      },
+      grid: {
+        visible: true,
         style: {
           fill: "#fff",
         },
       },
-      tickLine: { style: { fill: "#fff", visible: true } },
-      label: { style: { fill: "#fff" } },
-      grid: { style: { fill: "#fff" } },
     },
-    label: { visible: true },
     groupField: "name",
     color: ["rgb(1,121,255)", "rgb(7,88,183)"],
   };
@@ -166,30 +223,38 @@ export default function Home() {
     },
   ];
   const pieconfig = {
-    // height: 770,
+    height: 770,
+    renderer: "svg",
     forceFit: true,
     title: {
       visible: true,
       text: "客户区域分布图",
       style: {
         fill: "#fff",
+        fontSize: 18,
       },
     },
-    // description: {
-    //   visible: true,
-    //   text:
-    //     "指定颜色映射字段(colorField)\uFF0C饼图切片将根据该字段数据显示为不同的颜色\u3002指定颜色需要将color配置为一个数组\u3002\n当把饼图label的类型设置为inner时\uFF0C标签会显示在切片内部\u3002设置offset控制标签的偏移值\u3002",
-    //   style: {
-    //     fill: "#fff",
-    //   },
-    // },
+    legend: {
+      position: "bottom-center",
+      text: {
+        style: {
+          fill: "#fff",
+          fontSize: 14,
+        },
+      },
+    },
     radius: 0.8,
     data: piedata,
     angleField: "value",
     colorField: "type",
+    color: ["#29c4b1", "#ff7d3e", "#3b9bf8", "#b65dee"],
     label: {
       visible: true,
       type: "inner",
+      formatter: (angleField) => {
+        return angleField + "%";
+      },
+      style: { fill: "#fff", fontSize: 14, stroke: "" },
     },
   };
   return (
@@ -197,10 +262,14 @@ export default function Home() {
       <Row style={{ color: "#fff", fontSize: 20, paddingBottom: 15 }}>
         欢迎来到樱桃科技!
       </Row>
-      <Row gutter={128}>
+      <Row gutter={{ md: 60, xxl: 96 }}>
         <Col span={6}>
           <Card
-            style={{ borderRadius: 10, backgroundColor: "#29c4b1" }}
+            style={{
+              borderRadius: 10,
+              backgroundColor: "#29c4b1",
+              minWidth: 300,
+            }}
             bodyStyle={{ display: "flex", flexDirection: "row" }}
             bordered={false}
             hoverable
@@ -226,7 +295,11 @@ export default function Home() {
         </Col>
         <Col span={6}>
           <Card
-            style={{ borderRadius: 10, backgroundColor: "#ff7d3e" }}
+            style={{
+              borderRadius: 10,
+              backgroundColor: "#ff7d3e",
+              minWidth: 300,
+            }}
             bodyStyle={{ display: "flex", flexDirection: "row" }}
             bordered={false}
             hoverable
@@ -252,7 +325,11 @@ export default function Home() {
         </Col>
         <Col span={6}>
           <Card
-            style={{ borderRadius: 10, backgroundColor: "#3b9bf8" }}
+            style={{
+              borderRadius: 10,
+              backgroundColor: "#3b9bf8",
+              minWidth: 300,
+            }}
             bodyStyle={{ display: "flex", flexDirection: "row" }}
             bordered={false}
             hoverable
@@ -278,7 +355,11 @@ export default function Home() {
         </Col>
         <Col span={6}>
           <Card
-            style={{ borderRadius: 10, backgroundColor: "#b65dee" }}
+            style={{
+              borderRadius: 10,
+              backgroundColor: "#b65dee",
+              minWidth: 300,
+            }}
             bodyStyle={{ display: "flex", flexDirection: "row" }}
             bordered={false}
             hoverable
