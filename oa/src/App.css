@@ -57,3 +57,6 @@
   border-radius: 90px;
   padding: 12px;
 }
+.ant-menu-item-selected{
+  background-color: #010d24 !important;
+}

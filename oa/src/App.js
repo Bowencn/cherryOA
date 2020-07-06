@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import {
   UploadOutlined,
@@ -9,8 +9,10 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import Home from "./Views/Home";
+import Data from "./Views/Data";
 import HeaderBar from "./components/HeaderBar";
 const { Content, Sider } = Layout;
+const { SubMenu } = Menu;
 function App() {
   return (
     <Router>
@@ -51,27 +53,64 @@ function App() {
             defaultSelectedKeys={["1"]}
           >
             <Menu.Item key="1" icon={<UserOutlined />}>
-              首页
+              <Link to="/"/>首页
             </Menu.Item>
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
               工作文件
             </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />}>
-              工作任务
-            </Menu.Item>
-            <Menu.Item key="4" icon={<UserOutlined />}>
+            <SubMenu
+              key="sub1"
+              title={
+                <span>
+                  <UploadOutlined />
+                  <span>工作任务</span>
+                </span>
+              }
+            >
+              <Menu.Item
+                key="3"
+                style={{
+                  backgroundColor: "rgb(15,40,80)",
+                  margin: 0,
+                  color: "#fff",
+                }}
+              >
+                <Link to="/data"/>数据
+              </Menu.Item>
+              <Menu.Item
+                key="4"
+                style={{
+                  backgroundColor: "rgb(15,40,80)",
+                  margin: 0,
+                  color: "#fff",
+                }}
+              >
+                用户资料
+              </Menu.Item>
+              <Menu.Item
+                key="5"
+                style={{
+                  backgroundColor: "rgb(15,40,80)",
+                  margin: 0,
+                  color: "#fff",
+                }}
+              >
+                任务列表
+              </Menu.Item>
+            </SubMenu>
+            <Menu.Item key="6" icon={<UserOutlined />}>
               通讯录
             </Menu.Item>
-            <Menu.Item key="5" icon={<UserOutlined />}>
+            <Menu.Item key="7" icon={<UserOutlined />}>
               工作记录
             </Menu.Item>
-            <Menu.Item key="6" icon={<UserOutlined />}>
+            <Menu.Item key="8" icon={<UserOutlined />}>
               考勤打卡
             </Menu.Item>
-            <Menu.Item key="7" icon={<UserOutlined />}>
+            <Menu.Item key="9" icon={<UserOutlined />}>
               设置
             </Menu.Item>
-            <Menu.Item key="8" icon={<UserOutlined />}>
+            <Menu.Item key="10" icon={<UserOutlined />}>
               退出
             </Menu.Item>
           </Menu>
@@ -87,6 +126,7 @@ function App() {
             }}
           >
             <Route exact path="/" component={Home} />
+            <Route exact path="/data" component={Data} />
           </Content>
         </Layout>
       </Layout>
