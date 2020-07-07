@@ -11,6 +11,7 @@ import {
 import Home from "./Views/Home";
 import Data from "./Views/Data";
 import HeaderBar from "./components/HeaderBar";
+import ClockIn from "./Views/ClockIn"
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 function App() {
@@ -106,6 +107,7 @@ function App() {
             </Menu.Item>
             <Menu.Item key="8" icon={<UserOutlined />}>
               考勤打卡
+              <Link to='/ClockIn'/>
             </Menu.Item>
             <Menu.Item key="9" icon={<UserOutlined />}>
               设置
@@ -127,6 +129,7 @@ function App() {
           >
             <Route exact path="/" component={Home} />
             <Route exact path="/data" component={Data} />
+            <Route exact path="/ClockIn" component={ClockIn}/>
           </Content>
         </Layout>
       </Layout>

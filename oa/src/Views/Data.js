@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col } from "antd";
-import { GroupedColumn, Bullet, Donut } from "@ant-design/charts";
+import { GroupedColumn, Donut } from "@ant-design/charts";
 export default function Data() {
   const data = [
     {
