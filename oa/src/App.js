@@ -11,7 +11,8 @@ import {
 import Home from "./Views/Home";
 import Data from "./Views/Data";
 import HeaderBar from "./components/HeaderBar";
-import ClockIn from "./Views/ClockIn"
+import ClockIn from "./Views/ClockIn";
+import UserProfile from "./Views/UserProfile";
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 function App() {
@@ -54,7 +55,8 @@ function App() {
             defaultSelectedKeys={["1"]}
           >
             <Menu.Item key="1" icon={<UserOutlined />}>
-              <Link to="/"/>首页
+              <Link to="/" />
+              首页
             </Menu.Item>
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
               工作文件
@@ -76,7 +78,8 @@ function App() {
                   color: "#fff",
                 }}
               >
-                <Link to="/data"/>数据
+                <Link to="/data" />
+                数据
               </Menu.Item>
               <Menu.Item
                 key="4"
@@ -86,6 +89,7 @@ function App() {
                   color: "#fff",
                 }}
               >
+                <Link to="/UserProfile" />
                 用户资料
               </Menu.Item>
               <Menu.Item
@@ -107,7 +111,7 @@ function App() {
             </Menu.Item>
             <Menu.Item key="8" icon={<UserOutlined />}>
               考勤打卡
-              <Link to='/ClockIn'/>
+              <Link to="/ClockIn" />
             </Menu.Item>
             <Menu.Item key="9" icon={<UserOutlined />}>
               设置
@@ -129,7 +133,8 @@ function App() {
           >
             <Route exact path="/" component={Home} />
             <Route exact path="/data" component={Data} />
-            <Route exact path="/ClockIn" component={ClockIn}/>
+            <Route exact path="/ClockIn" component={ClockIn} />
+            <Route exact path="/UserProfile" component={UserProfile} />
           </Content>
         </Layout>
       </Layout>
