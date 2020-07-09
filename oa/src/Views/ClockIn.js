@@ -12,18 +12,18 @@ import {
   DatePicker,
 } from "antd";
 import { ClockCircleOutlined } from "@ant-design/icons";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import moment from "moment";
 import "moment/locale/zh-cn";
 moment.locale("zh-cn");
 export default function ClockIn() {
   const { TextArea } = Input;
   const { RangePicker } = DatePicker;
+  const [currentDate] = useState(
+    new Date().getFullYear() + "年" + (new Date().getMonth() + 1) + "月"
+  );
   const HorizontalLoginForm = () => {
     const [form] = Form.useForm();
     const [, forceUpdate] = useState();
-
-    // To disable submit button at the beginning.
     useEffect(() => {
       forceUpdate({});
     }, []);
@@ -35,10 +35,10 @@ export default function ClockIn() {
     return (
       <Form
         form={form}
-        name="horizontal_login"
+        name="search_clockIn"
         layout="inline"
         onFinish={onFinish}
-        style={{ padding: "0 10px" }}
+        style={{ padding: "10px 10px" }}
       >
         <Form.Item
           name="state"
@@ -73,7 +73,6 @@ export default function ClockIn() {
     );
   };
   const Card = (config) => {
-    console.log(config);
     return (
       <div
         style={{
@@ -226,9 +225,8 @@ export default function ClockIn() {
                   <div
                     style={{
                       position: "absolute",
-                      // width: "100px",
                       left: 140,
-                      top:90
+                      top: 90,
                     }}
                   >
                     <div
@@ -242,7 +240,7 @@ export default function ClockIn() {
                     <div
                       style={{
                         color: "#fff",
-                        position:'relative'
+                        position: "relative",
                       }}
                     >
                       <div
@@ -251,8 +249,8 @@ export default function ClockIn() {
                           height: 10,
                           backgroundColor: "rgb(26, 50, 96)",
                           borderRadius: 100,
-                          position:'absolute',
-                          top:7
+                          position: "absolute",
+                          top: 7,
                         }}
                       ></div>
                       科技之光大厦
@@ -317,7 +315,6 @@ export default function ClockIn() {
                         backgroundImage:
                           "linear-gradient(to right, rgb(135,34,216),rgb(130,35,191), rgb(175,31,182))",
                         position: "relative",
-
                         paddingTop: 25,
                         paddingLeft: 25,
                       }}
@@ -382,8 +379,6 @@ export default function ClockIn() {
                     </div>
                     <div
                       style={{
-                        // textAlign: "center",
-                        // width: 190,
                         color: "#fff",
                         display: "flex",
                         marginTop: 10,
@@ -405,17 +400,80 @@ export default function ClockIn() {
                 position: "absolute",
                 right: 0,
               }}
-            ></div>
+            >
+              <div
+                style={{
+                  height: "30%",
+                  borderBottom: "1px solid #fff",
+                  color: "#fff",
+                }}
+              >
+                <div style={{ paddingTop: 20 }}>
+                  <ClockCircleOutlined style={{ fontSize: 24 }} />
+                  <span
+                    style={{
+                      backgroundColor: "#000",
+                      padding: "5px 30px",
+                      fontSize: 16,
+                      borderRadius: 5,
+                      marginLeft: 20,
+                    }}
+                  >
+                    大雨25℃
+                  </span>
+                </div>
+                <div style={{ paddingTop: 30 }}>今日有雨，出门记得带伞哟</div>
+              </div>
+              <div style={{ color: "#fff", marginTop: 30 }}>
+                <span
+                  style={{
+                    backgroundColor: "#ff7d3e",
+                    padding: "5px 30px",
+                    fontSize: 16,
+                    borderRadius: 5,
+                  }}
+                >
+                  销售部：今日通知
+                </span>
+                <div style={{ marginTop: 30 }}>
+                  <textarea
+                    readonly="readonly"
+                    style={{
+                      /* 实现横线效果 */
+                      background: "linear-gradient(transparent 98%, #29c4b1 0)",
+                      lineHeight: "3.4em",
+                      backgroundSize: "100% 3em",
+                      backgroundAttachment:
+                        "local" /*  这里需要根据 textarea 的内容进行滚动 */,
+                      /* textarea样式修改 */
+                      width: "100%",
+                      resize: "none",
+                      fontSize: "14px",
+                      fontFamily: "inherit",
+                      outline: "none",
+                      border: "none",
+                      color: "#fff",
+                      wordBreak: "break-all",
+                      overflowX: "hidden",
+                      height: "200px",
+                      padding: "0 10px",
+                    }}
+                  >
+                    销售一部午饭后集体去会议室，集体培训一小时，带上笔记
+                  </textarea>
+                </div>
+              </div>
+            </div>
           </div>
         </Col>
         <Col span={11}>
-          <Card height={468}>
-            <Calendar />
+          <Card height={468} title={currentDate}>
+            <Calendar fullscreen={false} style={{ height: "100%" }} />
           </Card>
         </Col>
       </Row>
       <Row style={{ marginTop: 20, marginLeft: 30 }} gutter={28}>
-        <Col span={12}>
+        <Col span={12} className="clock-in-data">
           <Card height={423} title={"打卡数据"}>
             <HorizontalLoginForm />
             <Table
@@ -423,7 +481,7 @@ export default function ClockIn() {
               columns={columns}
               dataSource={data}
               style={{
-                backgroundColor: "rgb(1,13,37)",
+                background: "rgb(1,13,37)",
               }}
             />
           </Card>
@@ -432,28 +490,24 @@ export default function ClockIn() {
           <Card height={423} title={"补卡申请"}>
             <Form
               name="CardReplacement"
-              // layout="inline"
               style={{ padding: "10px", height: "100%", width: "100%" }}
-              // labelCol={{span:10}}
               {...formItemLayout}
             >
               <Row>
                 <Col span={12}>
                   <Form.Item
                     name="state"
-                    label={<div style={{ color: "#fff" }}>考勤查询</div>}
-                    // style={{ width: "50%" }}
+                    label={<div style={{ color: "#fff" }}>申请人</div>}
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 10 }}
                   >
-                    <Input />
+                    <Input style={{ backgroundColor: "" }} />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   <Form.Item
                     name="name"
-                    label={<div style={{ color: "#fff" }}>员工姓名</div>}
-                    // style={{ width: "50%" }}
+                    label={<div style={{ color: "#fff" }}>所属部门</div>}
                     labelCol={{ span: 6 }}
                     wrapperCol={{ span: 10 }}
                   >
@@ -462,7 +516,12 @@ export default function ClockIn() {
                 </Col>
               </Row>
               <Form.Item label={<div style={{ color: "#fff" }}>请假说明</div>}>
-                <TextArea rows={6} />
+                <TextArea
+                  rows={8}
+                  style={{
+                    resize: "none",
+                  }}
+                />
               </Form.Item>
               <Form.Item label={<div style={{ color: "#fff" }}>请假日期</div>}>
                 <RangePicker style={{ width: "100%" }} />
@@ -470,7 +529,6 @@ export default function ClockIn() {
               <Row>
                 <Col span={12}>
                   <Form.Item
-                    // name="state"
                     label={<div style={{ color: "#fff" }}>审核人</div>}
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 10 }}

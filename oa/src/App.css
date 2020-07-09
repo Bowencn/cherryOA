@@ -57,9 +57,24 @@
   border-radius: 90px;
   padding: 12px;
 }
-.ant-menu-item-selected{
+.ant-menu-item-selected {
   background-color: #010d24 !important;
 }
-.ant-timeline-item-head{
+.ant-timeline-item-head {
   background-color: transparent !important;
+}
+.clock-in-data .ant-table .ant-table-thead > tr > th {
+  background: rgb(1, 13, 37);
+  color: #fff;
+  border: 0;
+}
+.clock-in-data .ant-table .ant-table-tbody > tr > td {
+  background: rgb(1, 13, 37);
+  color: #fff;
+  border: 0;
+}
+.clock-in-data .ant-table .ant-table-tbody > tr.ant-table-row:hover > td {
+  background: rgb(1, 13, 37);
+  color: #fff;
+  border: 0;
 }
