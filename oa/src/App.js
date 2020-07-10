@@ -9,10 +9,11 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import Home from "./Views/Home";
-import Data from "./Views/Data";
+import Data from "./Views/workingTasks/Data";
 import HeaderBar from "./components/HeaderBar";
 import ClockIn from "./Views/ClockIn";
-import UserProfile from "./Views/UserProfile";
+import UserProfile from "./Views/workingTasks/UserProfile";
+import WorkingInformation from "./Views/workingPaper/WorkingInformation"
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 function App() {
@@ -58,9 +59,27 @@ function App() {
               <Link to="/" />
               首页
             </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              工作文件
-            </Menu.Item>
+            <SubMenu
+              key="sub1"
+              title={
+                <span>
+                  <UploadOutlined />
+                  <span>工作文件</span>
+                </span>
+              }
+            >
+              <Menu.Item
+                key="2"
+                style={{
+                  backgroundColor: "rgb(15,40,80)",
+                  margin: 0,
+                  color: "#fff",
+                }}
+              >
+                <Link to="/workingInformation" />
+                工作资料
+              </Menu.Item>
+            </SubMenu>
             <SubMenu
               key="sub1"
               title={
@@ -135,6 +154,8 @@ function App() {
             <Route exact path="/data" component={Data} />
             <Route exact path="/ClockIn" component={ClockIn} />
             <Route exact path="/UserProfile" component={UserProfile} />
+            <Route exact path="/workingInformation" component={WorkingInformation} />
+            
           </Content>
         </Layout>
       </Layout>
