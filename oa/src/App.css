@@ -78,3 +78,21 @@
   color: #fff;
   border: 0;
 }
+.userProfile .ant-table .ant-table-thead > tr > th {
+  background: rgb(15, 40, 80);
+  color: #fff;
+  border: 0;
+}
+.userProfile .ant-table .ant-table-tbody > tr:nth-child(odd) > td {
+  background: rgb(13, 31, 67);
+  color: #fff;
+  border: 0;
+}
+.userProfile .ant-table .ant-table-tbody > tr:nth-child(even) > td {
+  background: rgb(28, 57, 110);
+  color: #fff;
+  border: 0;
+}
+.userProfile .ant-table .ant-table-tbody > tr.ant-table-row:hover > td {
+  border: 0; 
+}

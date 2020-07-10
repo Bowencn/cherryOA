@@ -54,34 +54,36 @@ export default function UserProfile() {
   };
   const columns = [
     {
-      title: "考勤日期",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: "姓名",
+      title: "客户姓名",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "部门",
-      dataIndex: "department",
-      key: "department",
-    },
-    {
-      title: "上班时间",
-      key: "workShift",
-      dataIndex: "workShift",
-    },
-    {
-      title: "下班时间",
-      key: "closingTime",
-      dataIndex: "closingTime",
-    },
-    {
-      title: "考勤状态",
-      key: "state",
+      title: "成交状态",
       dataIndex: "state",
+      key: "state",
+    },
+    {
+      title: "联系电话",
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
+    },
+    {
+      title: "成交部门",
+      key: "department",
+      dataIndex: "department",
+    },
+    {
+      title: "联系员工",
+      key: "staff",
+      dataIndex: "staff",
+    },
+    {
+      title: "操作",
+      key: "active",
+      render:()=>{
+        return <a href="#!">查看</a>
+      }
     },
   ];
 
@@ -89,43 +91,193 @@ export default function UserProfile() {
     {
       key: "1",
       name: "John Brown",
-      workShift: "08:58:20",
-      closingTime: "18:01:00",
-      department: "销售部",
-      date: "2020-07-07",
-      state: "正常",
+      phoneNumber: "133-0000-2200",
+      staff: "思瑶",
+      department: "销售一部",
+      state: "已成交",
     },
     {
       key: "2",
       name: "Jim Green",
-      workShift: "08:58:20",
-      closingTime: "18:01:00",
-      department: "考勤部",
-      date: "2020-07-07",
-      state: "正常",
+      phoneNumber: "188-4477-6578",
+      staff: "王小天",
+      department: "销售二部",
+      state: "未成交",
     },
     {
       key: "3",
       name: "Joe Black",
-      workShift: "08:58:20",
-      closingTime: "18:01:00",
-      department: "技术部",
-      date: "2020-07-07",
-      state: "正常",
+      phoneNumber: "148-2456-2215",
+      staff: "苏白",
+      department: "销售三部",
+      state: "考虑中",
+    },{
+      key: "4",
+      name: "John Brown",
+      phoneNumber: "133-0000-2200",
+      staff: "思瑶",
+      department: "销售一部",
+      state: "已成交",
     },
+    {
+      key: "5",
+      name: "Jim Green",
+      phoneNumber: "188-4477-6578",
+      staff: "王小天",
+      department: "销售二部",
+      state: "未成交",
+    },
+    {
+      key: "6",
+      name: "Joe Black",
+      phoneNumber: "148-2456-2215",
+      staff: "苏白",
+      department: "销售三部",
+      state: "考虑中",
+    },{
+      key: "7",
+      name: "John Brown",
+      phoneNumber: "133-0000-2200",
+      staff: "思瑶",
+      department: "销售一部",
+      state: "已成交",
+    },
+    {
+      key: "8",
+      name: "Jim Green",
+      phoneNumber: "188-4477-6578",
+      staff: "王小天",
+      department: "销售二部",
+      state: "未成交",
+    },
+    {
+      key: "9",
+      name: "Joe Black",
+      phoneNumber: "148-2456-2215",
+      staff: "苏白",
+      department: "销售三部",
+      state: "考虑中",
+    },{
+      key: "10",
+      name: "John Brown",
+      phoneNumber: "133-0000-2200",
+      staff: "思瑶",
+      department: "销售一部",
+      state: "已成交",
+    },
+    {
+      key: "11",
+      name: "Jim Green",
+      phoneNumber: "188-4477-6578",
+      staff: "王小天",
+      department: "销售二部",
+      state: "未成交",
+    },
+    {
+      key: "12",
+      name: "Joe Black",
+      phoneNumber: "148-2456-2215",
+      staff: "苏白",
+      department: "销售三部",
+      state: "考虑中",
+    },
+    {
+      key: "13",
+      name: "John Brown",
+      phoneNumber: "133-0000-2200",
+      staff: "思瑶",
+      department: "销售一部",
+      state: "已成交",
+    },
+    {
+      key: "14",
+      name: "Jim Green",
+      phoneNumber: "188-4477-6578",
+      staff: "王小天",
+      department: "销售二部",
+      state: "未成交",
+    },
+    {
+      key: "15",
+      name: "Joe Black",
+      phoneNumber: "148-2456-2215",
+      staff: "苏白",
+      department: "销售三部",
+      state: "考虑中",
+    },
+    {
+      key: "16",
+      name: "John Brown",
+      phoneNumber: "133-0000-2200",
+      staff: "思瑶",
+      department: "销售一部",
+      state: "已成交",
+    },
+    // {
+    //   key: "17",
+    //   name: "Jim Green",
+    //   phoneNumber: "188-4477-6578",
+    //   staff: "王小天",
+    //   department: "销售二部",
+    //   state: "未成交",
+    //   active: "正常",
+    // },
+    // {
+    //   key: "18",
+    //   name: "Joe Black",
+    //   phoneNumber: "148-2456-2215",
+    //   staff: "苏白",
+    //   department: "销售三部",
+    //   state: "考虑中",
+    //   active: "正常",
+    // },{
+    //   key: "19",
+    //   name: "John Brown",
+    //   phoneNumber: "133-0000-2200",
+    //   staff: "思瑶",
+    //   department: "销售一部",
+    //   state: "已成交",
+    //   active: "正常",
+    // },
+    // {
+    //   key: "20",
+    //   name: "Jim Green",
+    //   phoneNumber: "188-4477-6578",
+    //   staff: "王小天",
+    //   department: "销售二部",
+    //   state: "未成交",
+    //   active: "正常",
+    // },
+    // {
+    //   key: "21",
+    //   name: "Joe Black",
+    //   phoneNumber: "148-2456-2215",
+    //   staff: "苏白",
+    //   department: "销售三部",
+    //   state: "考虑中",
+    //   active: "正常",
+    // },
   ];
   const Donutdata = [
     {
-      type: "满意",
+      type: "20岁以下",
       value: 27,
     },
     {
-      type: "不满意",
-      value: 25,
+      type: "20-30岁",
+      value: 55,
     },
     {
-      type: "未评价",
+      type: "30-40岁",
       value: 18,
+    },
+    {
+      type: "40-50岁",
+      value: 30,
+    },
+    {
+      type: "50岁以上",
+      value: 10,
     },
   ];
   const Donutconfig = {
@@ -145,80 +297,87 @@ export default function UserProfile() {
     data: Donutdata,
     angleField: "value",
     colorField: "type",
-    color: ["#ff7d3e", "#29c4b1", "#b65dee"],
+    // color: ["#ff7d3e", "#29c4b1", "#b65dee","#ffc895"," #fc6993"],
     statistic: {
       visible: true,
       style: { fill: "#fff", shadowColor: "#fff", fontSize: 88 },
     },
     label: {
       visible: true,
-      type: "spider",
-      //   formatter: (angleField,colorField) => {
-      //     return {name:angleField,value:colorField};
-      //   },
-      style: { fill: "#fff", fontSize: 44, stroke: "" },
+      type: "inner",
+      style: { fill: "#fff", fontSize: 14, stroke: "" },
     },
   };
   const Columndata = [
     {
-      type: "家具家电",
+      type: "一区",
       sales: 38,
     },
     {
-      type: "粮油副食",
+      type: "二区",
       sales: 52,
     },
     {
-      type: "生鲜水果",
+      type: "三区",
       sales: 61,
     },
     {
-      type: "美容洗护",
+      type: "四区",
       sales: 145,
     },
     {
-      type: "母婴用品",
+      type: "五区",
       sales: 48,
     },
     {
-      type: "进口食品",
+      type: "六区",
       sales: 38,
     },
     {
-      type: "食品饮料",
-      sales: 38,
-    },
-    {
-      type: "家庭清洁",
+      type: "七区",
       sales: 38,
     },
   ];
   const Columnconfig = {
     renderer: "svg",
-    title: {
-      visible: true,
-      text: "基础柱状图-图形标签",
-    },
-    description: {
-      visible: true,
-      text: "基础柱状图图形标签默认位置在柱形上部\u3002",
-    },
     forceFit: true,
     data: Columndata,
     padding: "auto",
     xField: "type",
     yField: "sales",
-    meta: {
-      type: { alias: "类别" },
-      sales: { alias: "销售额(万)" },
+    colorField: "type",
+    // color:["#b65dee"],
+    xAxis: {
+      min: 0,
+      title: {
+        visible: false,
+      },
+      label: {
+        style: {
+          fontSize: 14,
+          fill: "#fff",
+        },
+      },
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        visible: false,
+      },
+      label: {
+        visible: true,
+        style: {
+          fontSize: 14,
+          fill: "#fff",
+        },
+      },
     },
     label: {
       visible: true,
       style: {
-        fill: "#0D0E68",
-        fontSize: 12,
-        fontWeight: 600,
-        opacity: 0.6,
+        fontSize: 14,
+        fill: "#fff",
+        stroke: "",
       },
     },
   };
@@ -227,14 +386,14 @@ export default function UserProfile() {
       <Row gutter={[28, 28]}>
         <Col span={12}>
           <Card
-            height={468}
+            height={458}
             headerStyle={{ backgroundColor: "rgb(15, 40, 80)" }}
             title="客户年龄分布图"
           >
             <Donut {...Donutconfig} />
           </Card>
           <Card
-            height={468}
+            height={458}
             style={{ marginTop: 20 }}
             headerStyle={{ backgroundColor: "rgb(15, 40, 80)" }}
             title="客户区域分布图"
@@ -242,11 +401,11 @@ export default function UserProfile() {
             <Column {...Columnconfig} />
           </Card>
         </Col>
-        <Col span={12}>
+        <Col span={12} className="userProfile">
           <Card
-            height={956}
+            height={936}
             // style={{ marginTop: 20 }}
-            headerStyle={{ backgroundColor: "rgb(15, 40, 80)" }}
+            headerStyle={{ backgroundColor: "rgb(15, 40, 80)" ,borderBottom:"1px solid #ccc"}}
             title="客户联系资料图表"
           >
             <Table
@@ -256,6 +415,7 @@ export default function UserProfile() {
               style={{
                 background: "rgb(1,13,37)",
               }}
+              // scroll={{ y: '100vh'}}
             />
           </Card>
         </Col>
