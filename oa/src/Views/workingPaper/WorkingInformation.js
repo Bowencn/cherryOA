@@ -18,7 +18,7 @@ import {
   FileZipOutlined,
   FileSearchOutlined,
 } from "@ant-design/icons";
-import { GroupedColumn, Pie } from "@ant-design/charts";
+import { Pie } from "@ant-design/charts";
 export default function WorkingInformation() {
   const Card = (config) => {
     return (
@@ -65,30 +65,25 @@ export default function WorkingInformation() {
       key: "name",
     },
     {
-      title: "成交状态",
-      dataIndex: "state",
-      key: "state",
+      title: "客户性别",
+      dataIndex: "sex",
+      key: "sex",
     },
     {
-      title: "联系电话",
+      title: "联系方式",
       dataIndex: "phoneNumber",
       key: "phoneNumber",
     },
     {
-      title: "成交部门",
-      key: "department",
-      dataIndex: "department",
+      title: "区域范围",
+      key: "RegionalScope",
+      dataIndex: "RegionalScope",
     },
     {
-      title: "联系员工",
-      key: "staff",
-      dataIndex: "staff",
-    },
-    {
-      title: "操作",
-      key: "active",
-      render: () => {
-        return <a href="#!">查看</a>;
+      title: "主管",
+      key: "executiveDirector",
+      render: (text) => {
+        return "负责人:" + text.executiveDirector;
       },
     },
   ];
@@ -98,192 +93,144 @@ export default function WorkingInformation() {
       key: "1",
       name: "John Brown",
       phoneNumber: "133-0000-2200",
-      staff: "思瑶",
-      department: "销售一部",
-      state: "已成交",
+      executiveDirector: "思瑶",
+      RegionalScope: "成华区",
+      sex: "男",
     },
     {
       key: "2",
       name: "Jim Green",
       phoneNumber: "188-4077-6578",
-      staff: "王小天",
-      department: "销售二部",
-      state: "未成交",
+      executiveDirector: "王小天",
+      RegionalScope: "云龙区",
+      sex: "女",
     },
     {
       key: "3",
       name: "Joe Black",
       phoneNumber: "148-2456-2215",
-      staff: "苏白",
-      department: "销售三部",
-      state: "考虑中",
+      executiveDirector: "苏白",
+      RegionalScope: "白虎区",
+      sex: "女",
     },
     {
       key: "4",
       name: "John Brown",
       phoneNumber: "133-0000-2200",
-      staff: "思瑶",
-      department: "销售一部",
-      state: "已成交",
+      executiveDirector: "思瑶",
+      RegionalScope: "成华区",
+      sex: "男",
     },
     {
       key: "5",
       name: "Jim Green",
       phoneNumber: "188-4477-6578",
-      staff: "王小天",
-      department: "销售二部",
-      state: "未成交",
+      executiveDirector: "王小天",
+      RegionalScope: "云龙区",
+      sex: "女",
     },
     {
       key: "6",
       name: "Joe Black",
       phoneNumber: "148-2456-2215",
-      staff: "苏白",
-      department: "销售三部",
-      state: "考虑中",
+      executiveDirector: "苏白",
+      RegionalScope: "白虎区",
+      sex: "女",
     },
     {
       key: "7",
       name: "John Brown",
       phoneNumber: "133-0000-2200",
-      staff: "思瑶",
-      department: "销售一部",
-      state: "已成交",
+      executiveDirector: "思瑶",
+      RegionalScope: "成华区",
+      sex: "男",
     },
     {
       key: "8",
       name: "Jim Green",
       phoneNumber: "188-4477-6578",
-      staff: "王小天",
-      department: "销售二部",
-      state: "未成交",
+      executiveDirector: "王小天",
+      RegionalScope: "云龙区",
+      sex: "女",
     },
     {
       key: "9",
       name: "Joe Black",
       phoneNumber: "148-2456-2215",
-      staff: "苏白",
-      department: "销售三部",
-      state: "考虑中",
+      executiveDirector: "苏白",
+      RegionalScope: "白虎区",
+      sex: "女",
     },
     {
       key: "10",
       name: "John Brown",
       phoneNumber: "133-0000-2200",
-      staff: "思瑶",
-      department: "销售一部",
-      state: "已成交",
+      executiveDirector: "思瑶",
+      RegionalScope: "成华区",
+      sex: "男",
     },
     {
       key: "11",
       name: "Jim Green",
       phoneNumber: "188-4477-6578",
-      staff: "王小天",
-      department: "销售二部",
-      state: "未成交",
+      executiveDirector: "王小天",
+      RegionalScope: "云龙区",
+      sex: "女",
     },
     {
       key: "12",
       name: "Joe Black",
       phoneNumber: "148-2456-2215",
-      staff: "苏白",
-      department: "销售三部",
-      state: "考虑中",
+      executiveDirector: "苏白",
+      RegionalScope: "白虎区",
+      sex: "女",
     },
     {
       key: "13",
       name: "John Brown",
       phoneNumber: "133-0000-2200",
-      staff: "思瑶",
-      department: "销售一部",
-      state: "已成交",
+      executiveDirector: "思瑶",
+      RegionalScope: "成华区",
+      sex: "男",
     },
     {
       key: "14",
       name: "Jim Green",
       phoneNumber: "188-4477-6578",
-      staff: "王小天",
-      department: "销售二部",
-      state: "未成交",
+      executiveDirector: "王小天",
+      RegionalScope: "云龙区",
+      sex: "女",
     },
     {
       key: "15",
       name: "Joe Black",
       phoneNumber: "148-2456-2215",
-      staff: "苏白",
-      department: "销售三部",
-      state: "考虑中",
+      executiveDirector: "苏白",
+      RegionalScope: "白虎区",
+      sex: "女",
     },
     {
       key: "16",
       name: "John Brown",
       phoneNumber: "133-0000-2200",
-      staff: "思瑶",
-      department: "销售一部",
-      state: "已成交",
+      executiveDirector: "思瑶",
+      RegionalScope: "成华区",
+      sex: "男",
     },
-    // {
-    //   key: "17",
-    //   name: "Jim Green",
-    //   phoneNumber: "188-4477-6578",
-    //   staff: "王小天",
-    //   department: "销售二部",
-    //   state: "未成交",
-    //   active: "正常",
-    // },
-    // {
-    //   key: "18",
-    //   name: "Joe Black",
-    //   phoneNumber: "148-2456-2215",
-    //   staff: "苏白",
-    //   department: "销售三部",
-    //   state: "考虑中",
-    //   active: "正常",
-    // },{
-    //   key: "19",
-    //   name: "John Brown",
-    //   phoneNumber: "133-0000-2200",
-    //   staff: "思瑶",
-    //   department: "销售一部",
-    //   state: "已成交",
-    //   active: "正常",
-    // },
-    // {
-    //   key: "20",
-    //   name: "Jim Green",
-    //   phoneNumber: "188-4477-6578",
-    //   staff: "王小天",
-    //   department: "销售二部",
-    //   state: "未成交",
-    //   active: "正常",
-    // },
-    // {
-    //   key: "21",
-    //   name: "Joe Black",
-    //   phoneNumber: "148-2456-2215",
-    //   staff: "苏白",
-    //   department: "销售三部",
-    //   state: "考虑中",
-    //   active: "正常",
-    // },
   ];
   const piedata = [
     {
-      type: "成都",
+      type: "有意向客户",
       value: 15,
     },
     {
-      type: "绵阳",
+      type: "考虑中客户",
       value: 35,
     },
     {
-      type: "德阳",
+      type: "合作客户",
       value: 25,
-    },
-    {
-      type: "南充",
-      value: 25,
-    },
+    }
   ];
   const pieconfig = {
     height: 300,
@@ -458,9 +405,6 @@ export default function WorkingInformation() {
               </div>
             </div>
           ))}
-          {/* <Card></Card>
-          <Card></Card>
-          <Card></Card> */}
         </Col>
         <Col span={17} style={{ paddingLeft: 48 }} className="userProfile">
           <Card
@@ -468,7 +412,7 @@ export default function WorkingInformation() {
             headerStyle={{
               backgroundImage:
                 "linear-gradient(to right, rgb(135,34,216),rgb(130,35,191),rgb(139,34,188), rgb(160,35,173))",
-            //   borderBottom: "1px solid #ccc",
+              //   borderBottom: "1px solid #ccc",
               height: 80,
             }}
             title={
@@ -480,14 +424,14 @@ export default function WorkingInformation() {
                     justifyContent: "left",
                     flexDirection: "column",
                     textAlign: "left",
-                    paddingLeft:40
+                    paddingLeft: 40,
                   }}
                 >
-                  <div style={{marginTop:10}}>
-                    <span style={{fontSize: 18}}>客户联系资料图表</span>
-                    <span style={{marginLeft:40}}>2020-07-10</span>
+                  <div style={{ marginTop: 10 }}>
+                    <span style={{ fontSize: 18 }}>客户联系资料图表</span>
+                    <span style={{ marginLeft: 40 }}>2020-07-10</span>
                   </div>
-                  <span style={{marginTop:15}}>五月份公司谈判客户资料</span>
+                  <span style={{ marginTop: 15 }}>五月份公司谈判客户资料</span>
                 </Col>
                 <Col
                   span={8}
@@ -581,7 +525,21 @@ export default function WorkingInformation() {
                   borderRadius: 10,
                 }}
               >
-                <Pie {...pieconfig} />
+                <div
+                  style={{
+                    height: 300,
+                  }}
+                >
+                  <div style={{ borderBottom: "1px dashed #000", height: "30%",textAlign:'center' }}>
+                    <span style={{color:'#fff',fontSize:18,lineHeight:5}}>姓名：穆端文</span>
+                  </div>
+                  <div style={{ borderBottom: "1px dashed #000", height: "40%",display:'flex',flexDirection:'column',padding: '10px 30px' }}>
+                    <span style={{color:'#fff',fontSize:15,paddingBottom: 5,paddingTop:5}}>联系情况：有意向</span>
+                    <span style={{color:'#fff',fontSize:15,paddingBottom: 5}}>考虑问题：售后服务</span>
+                    <span style={{color:'#fff',fontSize:15,paddingBottom: 5}}>交易方式：面谈</span>
+                  </div>
+                  <div style={{height:"30%",padding: '5px 30px',color:'#fff'}}>5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。</div>
+                </div>
               </div>
             </Col>
             <Col span={12} style={{ paddingLeft: 12 }}>
