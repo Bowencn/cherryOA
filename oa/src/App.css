@@ -96,3 +96,6 @@
 .userProfile .ant-table .ant-table-tbody > tr.ant-table-row:hover > td {
   border: 0; 
 }
+.setup .ant-input:focus, .ant-input-focused{
+  box-shadow: 0 0 0 0  !important;
+}

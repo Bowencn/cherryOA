@@ -14,6 +14,7 @@ import HeaderBar from "./components/HeaderBar";
 import ClockIn from "./Views/ClockIn";
 import UserProfile from "./Views/workingTasks/UserProfile";
 import WorkingInformation from "./Views/workingPaper/WorkingInformation"
+import SetUp from "./Views/SetUp"
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 function App() {
@@ -133,6 +134,7 @@ function App() {
               <Link to="/ClockIn" />
             </Menu.Item>
             <Menu.Item key="9" icon={<UserOutlined />}>
+              <Link to="/SetUp"/>
               设置
             </Menu.Item>
             <Menu.Item key="10" icon={<UserOutlined />}>
@@ -155,6 +157,7 @@ function App() {
             <Route exact path="/ClockIn" component={ClockIn} />
             <Route exact path="/UserProfile" component={UserProfile} />
             <Route exact path="/workingInformation" component={WorkingInformation} />
+            <Route exact path="/setUp" component={SetUp} />
             
           </Content>
         </Layout>
