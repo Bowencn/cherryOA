@@ -8,9 +8,10 @@ import {
   Input,
   Button,
   Timeline,
-  Badge,
+  // TextArea,
   Avatar,
 } from "antd";
+const { TextArea } = Input;
 
 export default function SetUp() {
   const Card = (config) => {
@@ -51,6 +52,20 @@ export default function SetUp() {
       </div>
     );
   };
+  const listdata = [
+    {
+      title: "销售一部调研1组",
+    },
+    {
+      title: "销售一部调研2组",
+    },
+    {
+      title: "销售一部调研3组",
+    },
+    {
+      title: "销售一部调研4组",
+    },
+  ];
   return (
     <div className="setup">
       <Row gutter={[24, 0]}>
@@ -229,16 +244,13 @@ export default function SetUp() {
                 </div>
               </div>
             </div>
-            <div style={{textAlign:'center',marginTop:30}}>
-              <Button
-                type="primary"
-                style={{ borderRadius:5 }}
-              >
+            <div style={{ textAlign: "center", marginTop: 30 }}>
+              <Button type="primary" style={{ borderRadius: 5 }}>
                 确认
               </Button>
               <Button
                 type="primary"
-                style={{ borderRadius:5,marginLeft:80 }}
+                style={{ borderRadius: 5, marginLeft: 80 }}
               >
                 取消
               </Button>
@@ -249,7 +261,7 @@ export default function SetUp() {
           <Row gutter={[0, 24]}>
             <Col span={24}>
               <Card
-                height={458}
+                height={452}
                 headerStyle={{
                   backgroundImage:
                     "linear-gradient(to right, rgb(135,34,216),rgb(130,35,191),rgb(139,34,188), rgb(160,35,173))",
@@ -260,11 +272,97 @@ export default function SetUp() {
                     <span>个人资料编辑</span>
                   </div>
                 }
-              ></Card>
+              >
+                <Row>
+                  <Col span={10}>
+                    <ul
+                      style={{
+                        backgroundColor: "#fff",
+                        // borderRadius: 15,
+                        // height: 300,
+                        padding: "0",
+                      }}
+                    >
+                      {[
+                        { key: "姓名", value: "罗世杰" },
+                        { key: "昵称", value: "游戏大王" },
+                        { key: "年龄", value: "26岁" },
+                        { key: "邮箱", value: "133222@qq.com" },
+                        { key: "职位", value: "销售部主管" },
+                        { key: "电话", value: "13438992890" },
+                        { key: "地址", value: "成都市武侯区" },
+                      ].map((item) => (
+                        <li
+                          style={{
+                            listStyle: "none",
+                            textAlign: "left",
+                            fontSize: 16,
+                            display: "flex",
+                          }}
+                        >
+                          <div
+                            style={{
+                              backgroundColor: "rgb(1, 13, 37)",
+                              padding: "16px 10px",
+                              width: "17%",
+                              textAlign: "center",
+                              color:'#fff'
+                            }}
+                          >
+                            <span>{item.key}:</span>
+                          </div>
+                          <div
+                            style={{
+                              backgroundColor: "#fff",
+                              borderBottom: "1px solid #444",
+                              padding: "16px 10px",
+                              width: "80%",
+                              textAlign: "left",
+                            }}
+                          >
+                            <span>{item.value}</span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </Col>
+                  <Col span={11} style={{ color: "#fff", marginLeft: 40 }}>
+                    <span
+                      style={{
+                        padding: "30px 50px",
+                        display: "inline-block",
+                        fontSize: 16,
+                      }}
+                    >
+                      编辑名片
+                    </span>
+                    <div
+                      style={{
+                        height: 300,
+                        overflow: "hidden",
+                        borderRadius: 15,
+                      }}
+                    >
+                      <TextArea
+                        rows={14}
+                        style={{
+                          resize: "none",
+                          backgroundColor: "#fff",
+                          border: "0",
+                          padding: 30,
+                          // color: "#fff",
+                          fontSize: 16,
+                        }}
+                        defaultValue="大家好，我是罗世杰，是销售一部的主管，工作上有什么事情大家互相帮助"
+                      />
+                    </div>
+                  </Col>
+                </Row>
+              </Card>
             </Col>
             <Col span={24}>
               <Card
-                height={458}
+                height={464}
                 headerStyle={{
                   backgroundImage:
                     "linear-gradient(to right, rgb(135,34,216),rgb(130,35,191),rgb(139,34,188), rgb(160,35,173))",
@@ -275,7 +373,77 @@ export default function SetUp() {
                     <span>部门分组</span>
                   </div>
                 }
-              ></Card>
+              >
+                <Row>
+                  <Col span={10} style={{ color: "#fff", marginLeft: 50 }}>
+                    <span
+                      style={{
+                        padding: "30px 50px",
+                        display: "inline-block",
+                        fontSize: 16,
+                      }}
+                    >
+                      小组名称
+                    </span>
+                    <ul
+                      style={{
+                        backgroundColor: "rgb(26, 50, 96)",
+                        borderRadius: 15,
+                        height: 300,
+                        padding: "0",
+                      }}
+                    >
+                      {listdata.map((item) => (
+                        <div style={{ color: "#fff" }}>
+                          <li
+                            style={{
+                              listStyle: "none",
+                              borderBottom: "1px solid #fff",
+                              padding: "10px",
+                              textAlign: "left",
+                              fontSize: 16,
+                              paddingLeft: 15,
+                            }}
+                          >
+                            {item.title}
+                          </li>
+                        </div>
+                      ))}
+                    </ul>
+                  </Col>
+                  <Col span={11} style={{ color: "#fff", marginLeft: 40 }}>
+                    <span
+                      style={{
+                        padding: "30px 50px",
+                        display: "inline-block",
+                        fontSize: 16,
+                      }}
+                    >
+                      小组成员
+                    </span>
+                    <div
+                      style={{
+                        height: 300,
+                        overflow: "hidden",
+                        borderRadius: 15,
+                      }}
+                    >
+                      <TextArea
+                        rows={14}
+                        style={{
+                          resize: "none",
+                          backgroundColor: "rgb(26, 50, 96)",
+                          border: "0",
+                          padding: 30,
+                          color: "#fff",
+                          fontSize: 16,
+                        }}
+                        defaultValue="刘梅，王劫，周云，王美丽，张雪艳，彭玉，段辉"
+                      />
+                    </div>
+                  </Col>
+                </Row>
+              </Card>
             </Col>
           </Row>
         </Col>
