@@ -13,8 +13,10 @@ import Data from "./Views/workingTasks/Data";
 import HeaderBar from "./components/HeaderBar";
 import ClockIn from "./Views/ClockIn";
 import UserProfile from "./Views/workingTasks/UserProfile";
-import WorkingInformation from "./Views/workingPaper/WorkingInformation"
-import SetUp from "./Views/SetUp"
+import WorkingInformation from "./Views/workingPaper/WorkingInformation";
+import SetUp from "./Views/SetUp";
+import WorkRecord from "./Views/WorkRecord";
+import Apply from "./Views/Apply";
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 function App() {
@@ -82,7 +84,7 @@ function App() {
               </Menu.Item>
             </SubMenu>
             <SubMenu
-              key="sub1"
+              key="sub2"
               title={
                 <span>
                   <UploadOutlined />
@@ -123,22 +125,54 @@ function App() {
                 任务列表
               </Menu.Item>
             </SubMenu>
-            <Menu.Item key="6" icon={<UserOutlined />}>
-              通讯录
-            </Menu.Item>
-            <Menu.Item key="7" icon={<UserOutlined />}>
+            <SubMenu
+              key="sub3"
+              title={
+                <span>
+                  <UploadOutlined />
+                  <span>通讯录</span>
+                </span>
+              }
+            >
+              <Menu.Item
+                key="6"
+                style={{
+                  backgroundColor: "rgb(15,40,80)",
+                  margin: 0,
+                  color: "#fff",
+                }}
+              >
+                部门成员
+              </Menu.Item>
+              <Menu.Item
+                key="7"
+                style={{
+                  backgroundColor: "rgb(15,40,80)",
+                  margin: 0,
+                  color: "#fff",
+                }}
+              >
+                所有成员
+              </Menu.Item>
+            </SubMenu>
+            <Menu.Item key="8" icon={<UserOutlined />}>
+              <Link to="/workRecord" />
               工作记录
             </Menu.Item>
-            <Menu.Item key="8" icon={<UserOutlined />}>
+            <Menu.Item key="9" icon={<UserOutlined />}>
               考勤打卡
               <Link to="/ClockIn" />
             </Menu.Item>
-            <Menu.Item key="9" icon={<UserOutlined />}>
-              <Link to="/SetUp"/>
+            <Menu.Item key="10" icon={<UserOutlined />}>
+              <Link to="/SetUp" />
               设置
             </Menu.Item>
-            <Menu.Item key="10" icon={<UserOutlined />}>
+            <Menu.Item key="11" icon={<UserOutlined />}>
               退出
+            </Menu.Item>
+            <Menu.Item key="12" icon={<UserOutlined />}>
+              <Link to="/apply" />
+              申请
             </Menu.Item>
           </Menu>
         </Sider>
@@ -156,9 +190,16 @@ function App() {
             <Route exact path="/data" component={Data} />
             <Route exact path="/ClockIn" component={ClockIn} />
             <Route exact path="/UserProfile" component={UserProfile} />
-            <Route exact path="/workingInformation" component={WorkingInformation} />
+            <Route
+              exact
+              path="/workingInformation"
+              component={WorkingInformation}
+            />
             <Route exact path="/setUp" component={SetUp} />
-            
+            <Route exact path="/workRecord" component={WorkRecord} />
+            {/* <Route exact path="/workRecord" component={WorkRecord} />
+            <Route exact path="/workRecord" component={WorkRecord} /> */}
+            <Route exact path="/apply" component={Apply} />
           </Content>
         </Layout>
       </Layout>
