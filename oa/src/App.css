@@ -99,3 +99,18 @@
 .setup .ant-input:focus, .ant-input-focused{
   box-shadow: 0 0 0 0  !important;
 }
+.SignInForm .ant-table .ant-table-thead > tr > th {
+  background: rgb(1, 13, 37);
+  color: #fff;
+  border: 0;
+}
+.SignInForm .ant-table .ant-table-tbody > tr > td {
+  background: rgb(1, 13, 37);
+  color: #fff;
+  border: 0;
+}
+.SignInForm .ant-table .ant-table-tbody > tr.ant-table-row:hover > td {
+  background: rgb(1, 13, 37);
+  color: #fff;
+  border: 0; 
+}
