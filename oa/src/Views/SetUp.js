@@ -291,7 +291,7 @@ export default function SetUp() {
                         { key: "职位", value: "销售部主管" },
                         { key: "电话", value: "13438992890" },
                         { key: "地址", value: "成都市武侯区" },
-                      ].map((item) => (
+                      ].map((item, index) => (
                         <li
                           style={{
                             listStyle: "none",
@@ -306,7 +306,7 @@ export default function SetUp() {
                               padding: "16px 10px",
                               width: "17%",
                               textAlign: "center",
-                              color:'#fff'
+                              color: "#fff",
                             }}
                           >
                             <span>{item.key}:</span>
@@ -320,7 +320,21 @@ export default function SetUp() {
                               textAlign: "left",
                             }}
                           >
-                            <span>{item.value}</span>
+                            <div style={{ position: "relative" }}>
+                              {item.value}
+                              {
+                                <Button
+                                  style={{
+                                    border: "0",
+                                    position: "absolute",
+                                    right: 0,
+                                    boxShadow: "0 0 0 0 ",
+                                  }}
+                                >
+                                  修改
+                                </Button>
+                              }
+                            </div>
                           </div>
                         </li>
                       ))}
@@ -341,6 +355,7 @@ export default function SetUp() {
                         height: 300,
                         overflow: "hidden",
                         borderRadius: 15,
+                        marginLeft:30
                       }}
                     >
                       <TextArea
