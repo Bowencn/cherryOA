@@ -323,12 +323,12 @@ export default function WorkRecord() {
       <Row style={{ marginTop: 20, marginLeft: 30 }} gutter={28}>
         <Col span={12}>
           <Card height={468} title={"记录本"}>
-            <div style={{ background: "#FEF9E7" }}>
+            <div style={{ background: "rgb(1,13,37)" }}>
               <textarea
                 // readonly="readonly"
                 style={{
                   /* 实现横线效果 */
-                  background: "linear-gradient(transparent 95%, #424949 0)",
+                  background: "linear-gradient(transparent 95%, rgb(20,119,114) 0)",
                   lineHeight: "3.4em",
                   backgroundSize: "100% 3em",
                   backgroundAttachment:
@@ -340,7 +340,7 @@ export default function WorkRecord() {
                   fontFamily: "inherit",
                   outline: "none",
                   border: "none",
-                  color: "#000",
+                  color: "#fff",
                   wordBreak: "break-all",
                   overflowX: "hidden",
                   height: "420px",

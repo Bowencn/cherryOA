@@ -114,3 +114,23 @@
   color: #fff;
   border: 0; 
 }
+
+.allMembers .ant-table .ant-table-thead > tr > th {
+  background: rgb(1, 13, 37);
+  color: #fff;
+  border: 0;
+}
+.allMembers .ant-table .ant-table-tbody > tr > td {
+  background: rgb(1, 13, 37);
+  color: #fff;
+  border: 0;
+}
+.allMembers .ant-table .ant-table-tbody > tr.ant-table-row:hover > td {
+  background: rgb(1, 13, 37);
+  color: #fff;
+  border: 0; 
+}
+/* .allMembers .ant-table .ant-pagination>li{
+  background: rgb(26, 50, 96);
+  color: #fff;
+} */
