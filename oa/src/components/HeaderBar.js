@@ -34,13 +34,15 @@ export default function HeaderBar() {
           />
         </Col>
 
-        <Col span={1} style={{textAlign:'center'}}>
-          <Avatar style={{ color: "#f56a00", backgroundColor: "#fde3cf"}}>
-            W
-          </Avatar>
+        <Col span={1} style={{ textAlign: "center" }}>
+          <Avatar
+            style={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+            size={52}
+            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594979356642&di=7468eb82feb7ede61b658e56e104757a&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201901%2F17%2F20190117230425_eofqv.thumb.700_0.jpg"
+          ></Avatar>
         </Col>
 
-        <Col span={2} style={{textAlign:'center'}}>
+        <Col span={2} style={{ textAlign: "center" }}>
           <Dropdown overlay={menu} trigger={["click"]}>
             <a
               className="ant-dropdown-link"

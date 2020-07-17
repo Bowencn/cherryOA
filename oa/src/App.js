@@ -18,6 +18,7 @@ import SetUp from "./Views/SetUp";
 import WorkRecord from "./Views/WorkRecord";
 import Apply from "./Views/Apply";
 import AllMembers from "./Views/mailList/AllMembers"
+import DepartmentMembers from "./Views/mailList/DepartmentMembers"
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 function App() {
@@ -143,6 +144,7 @@ function App() {
                   color: "#fff",
                 }}
               >
+                <Link to="/DepartmentMembers"/>
                 部门成员
               </Menu.Item>
               <Menu.Item
@@ -199,7 +201,7 @@ function App() {
             />
             <Route exact path="/setUp" component={SetUp} />
             <Route exact path="/workRecord" component={WorkRecord} />
-            {/* <Route exact path="/workRecord" component={WorkRecord} /> */}
+            <Route exact path="/DepartmentMembers" component={DepartmentMembers} />
             <Route exact path="/AllMembers" component={AllMembers} />
             <Route exact path="/apply" component={Apply} />
           </Content>
