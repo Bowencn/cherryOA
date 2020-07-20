@@ -36,8 +36,22 @@
     transform: rotate(360deg);
   }
 }
+#root{
+  height: 100%;
+  width: 100%;
 
+}
 /* antd */
+
+.example {
+  text-align: center;
+  background: rgba(117, 117, 117, 0.295);
+  border-radius: 4px;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
 #components-layout-demo-responsive .logo {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);
