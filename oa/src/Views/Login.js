@@ -1,5 +1,7 @@
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
+import axios from 'axios'
+import conf from '../server.conf'
 export default function Login(props) {
   const layout = {
     labelCol: {
@@ -15,10 +17,15 @@ export default function Login(props) {
       span: 4,
     },
   };
+  const login = async(values)=>{
+    const res = await axios.post(`${conf.addres}/api/login`,values)
+    console.log(res)
+  }
   const onFinish = (values) => {
     console.log("Success:", values);
     console.log(props);
-    props.history.push("/");
+    login(values)
+    // props.history.push("/");
   };
 
   const onFinishFailed = (errorInfo) => {

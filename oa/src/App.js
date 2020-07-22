@@ -27,7 +27,7 @@ function App(props) {
     setLogOut(true);
     await setTimeout(() => {
       setLogOut(false);
-      // props.history.push("/login");
+      props.history.push("/login");
     }, 1000);
   };
   return (
