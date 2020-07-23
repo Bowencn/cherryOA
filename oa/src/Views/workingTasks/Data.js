@@ -129,7 +129,7 @@ export default function Data() {
     renderer: "svg",
     title: {
       visible: true,
-      text: "1-12月客户满意度图标",
+      text: "公司员工本月上月业绩对比",
       style: {
         fontSize: 18,
         fill: "#fff",
