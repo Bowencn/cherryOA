@@ -10,6 +10,7 @@ app.use(
   })
 );
 app.use(bodyParser.json({ limit: "50mb" }));
+app.use(express.static('public'))
 //跨域
 app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

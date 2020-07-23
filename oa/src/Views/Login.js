@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
-import axios from 'axios'
-import conf from '../server.conf'
+import axios from "axios";
+import conf from "../server.conf";
 export default function Login(props) {
   const layout = {
     labelCol: {
@@ -17,15 +17,20 @@ export default function Login(props) {
       span: 4,
     },
   };
-  const login = async(values)=>{
-    const res = await axios.post(`${conf.addres}/api/login`,values)
-    console.log(res)
-  }
-  const onFinish = (values) => {
+  const login = async (values) => {
+    const res = await axios.post(`${conf.address}/api/login`, values);
+    // console.log(res)
+    return res.data.data.entity;
+  };
+  const onFinish = async (values) => {
     console.log("Success:", values);
     console.log(props);
-    login(values)
-    // props.history.push("/");
+    let data = await login(values);
+    console.log(data);
+    props.history.push({
+      pathname: "/",
+      query: data,
+    });
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -43,58 +48,59 @@ export default function Login(props) {
         backgroundSize: "cover",
       }}
     >
-        <div
-      style={{
-        width: "100%",
-        height: "100%",
-        background: "rgba(0,0,0,0.7)",
-        position: "relative",
-      }}
-    >
       <div
         style={{
-          position: "absolute",
-          top: "50%",
-          width:'100%',
-          transform: "translateY(-50%)",
+          width: "100%",
+          height: "100%",
+          background: "rgba(0,0,0,0.7)",
+          position: "relative",
         }}
       >
-        <Form
-          {...layout}
-          name="basic"
-          initialValues={{
-            remember: true,
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            width: "100%",
+            transform: "translateY(-50%)",
           }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          style={{color: "#fff"}}
         >
-          <Form.Item
-            label={<span style={{ color: "#fff" }}>用户名:</span>}
-            name="username"
+          <Form
+            {...layout}
+            name="basic"
+            initialValues={{
+              remember: true,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
             style={{ color: "#fff" }}
           >
-            <Input />
-          </Form.Item>
+            <Form.Item
+              label={<span style={{ color: "#fff" }}>用户名:</span>}
+              name="username"
+              style={{ color: "#fff" }}
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item
-            label={<span style={{ color: "#fff" }}>密码:</span>}
-            name="password"
-          >
-            <Input.Password />
-          </Form.Item>
+            <Form.Item
+              label={<span style={{ color: "#fff" }}>密码:</span>}
+              name="password"
+            >
+              <Input.Password />
+            </Form.Item>
 
-          {/* <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+            {/* <Form.Item {...tailLayout} name="remember" valuePropName="checked">
             <Checkbox>记住密码</Checkbox>
           </Form.Item> */}
 
-          <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit">
-              登入
-            </Button>
-          </Form.Item>
-        </Form>
-      </div></div>
+            <Form.Item {...tailLayout}>
+              <Button type="primary" htmlType="submit">
+                登入
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
+      </div>
     </div>
   );
 }

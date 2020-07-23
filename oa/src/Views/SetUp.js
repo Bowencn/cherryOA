@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Row,
@@ -11,9 +11,23 @@ import {
   // TextArea,
   Avatar,
 } from "antd";
+import axios from "axios";
+import conf from "../server.conf";
 const { TextArea } = Input;
 
-export default function SetUp() {
+export default function SetUp(props) {
+  const [personalInfo, setPersonalInfo] = useState();
+  useEffect(() => {
+    let id = props.location.query.id;
+    console.log(id);
+    const getUserInfo = async () => {
+      let res = await axios.get(`${conf.address}/api/user/${id}`);
+      console.log(res.data.data.entity);
+      setPersonalInfo(res.data.data.entity);
+    };
+    getUserInfo();
+  }, [props]);
+
   const Card = (config) => {
     return (
       <div
@@ -88,16 +102,15 @@ export default function SetUp() {
               <Avatar
                 style={{
                   color: "#f56a00",
-                  backgroundColor: "#fde3cf",
+                  // backgroundColor: "#fde3cf",
                   position: "absolute",
                   left: "50%",
                   top: "50%",
                   transform: "translate(-50%,-50%)",
                 }}
+                src={personalInfo && conf.address + personalInfo.userimg}
                 size={188}
-              >
-                W
-              </Avatar>
+              />
             </div>
             <div
               style={{
@@ -115,42 +128,44 @@ export default function SetUp() {
                   overflow: "hidden",
                 }}
               >
-                {[
-                  { key: "姓名", value: "罗世杰" },
-                  { key: "昵称", value: "游戏大王" },
-                  { key: "年龄", value: "26岁" },
-                  { key: "邮箱", value: "133222@qq.com" },
-                  { key: "职位", value: "销售部主管" },
-                ].map((item) => (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      color: "#fff",
-                    }}
-                  >
+                {personalInfo &&
+                  [
+                    { key: "姓名", value: personalInfo.name },
+                    { key: "昵称", value: personalInfo.nickname },
+                    { key: "年龄", value: personalInfo.age },
+                    { key: "邮箱", value: personalInfo.mailbox },
+                    { key: "职位", value: personalInfo.position },
+                  ].map((item, index) => (
                     <div
                       style={{
-                        backgroundColor: "rgb(66,148,248)",
-                        padding: "20px 20px 20px 0px",
-                        width: "17%",
-                        textAlign: "right",
+                        display: "flex",
+                        flexDirection: "row",
+                        color: "#fff",
                       }}
+                      key={index}
                     >
-                      <span>姓名:</span>
+                      <div
+                        style={{
+                          backgroundColor: "rgb(66,148,248)",
+                          padding: "20px 20px 20px 0px",
+                          width: "17%",
+                          textAlign: "right",
+                        }}
+                      >
+                        <span>{item.key}</span>
+                      </div>
+                      <div
+                        style={{
+                          backgroundColor: "rgb(26, 50, 96)",
+                          padding: "20px 0px 20px 10px",
+                          width: "80%",
+                          textAlign: "left",
+                        }}
+                      >
+                        <span>{item.value}</span>
+                      </div>
                     </div>
-                    <div
-                      style={{
-                        backgroundColor: "rgb(26, 50, 96)",
-                        padding: "20px 0px 20px 10px",
-                        width: "80%",
-                        textAlign: "left",
-                      }}
-                    >
-                      <span>{item.value}</span>
-                    </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </div>
             <div
@@ -283,61 +298,63 @@ export default function SetUp() {
                         padding: "0",
                       }}
                     >
-                      {[
-                        { key: "姓名", value: "罗世杰" },
-                        { key: "昵称", value: "游戏大王" },
-                        { key: "年龄", value: "26岁" },
-                        { key: "邮箱", value: "133222@qq.com" },
-                        { key: "职位", value: "销售部主管" },
-                        { key: "电话", value: "13438992890" },
-                        { key: "地址", value: "成都市武侯区" },
-                      ].map((item, index) => (
-                        <li
-                          style={{
-                            listStyle: "none",
-                            textAlign: "left",
-                            fontSize: 16,
-                            display: "flex",
-                          }}
-                        >
-                          <div
+                      {personalInfo &&
+                        [
+                          { key: "姓名", value: personalInfo.name },
+                          { key: "昵称", value: personalInfo.nickname },
+                          { key: "年龄", value: personalInfo.age },
+                          { key: "邮箱", value: personalInfo.mailbox },
+                          { key: "职位", value: personalInfo.position },
+                          { key: "电话", value: personalInfo.telephone },
+                          { key: "地址", value: personalInfo.address },
+                        ].map((item, index) => (
+                          <li
                             style={{
-                              backgroundColor: "rgb(1, 13, 37)",
-                              padding: "16px 10px",
-                              width: "17%",
-                              textAlign: "center",
-                              color: "#fff",
-                            }}
-                          >
-                            <span>{item.key}:</span>
-                          </div>
-                          <div
-                            style={{
-                              backgroundColor: "#fff",
-                              borderBottom: "1px solid #444",
-                              padding: "16px 10px",
-                              width: "80%",
+                              listStyle: "none",
                               textAlign: "left",
+                              fontSize: 16,
+                              display: "flex",
                             }}
+                            key={index}
                           >
-                            <div style={{ position: "relative" }}>
-                              {item.value}
-                              {
-                                <Button
-                                  style={{
-                                    border: "0",
-                                    position: "absolute",
-                                    right: 0,
-                                    boxShadow: "0 0 0 0 ",
-                                  }}
-                                >
-                                  修改
-                                </Button>
-                              }
+                            <div
+                              style={{
+                                backgroundColor: "rgb(1, 13, 37)",
+                                padding: "16px 10px",
+                                width: "17%",
+                                textAlign: "center",
+                                color: "#fff",
+                              }}
+                            >
+                              <span>{item.key}:</span>
                             </div>
-                          </div>
-                        </li>
-                      ))}
+                            <div
+                              style={{
+                                backgroundColor: "#fff",
+                                borderBottom: "1px solid #444",
+                                padding: "16px 10px",
+                                width: "80%",
+                                textAlign: "left",
+                              }}
+                            >
+                              <div style={{ position: "relative" }}>
+                                {item.value}
+                                {
+                                  <Button
+                                    style={{
+                                      border: "0",
+                                      position: "absolute",
+                                      right: 0,
+                                      boxShadow: "0 0 0 0 ",
+                                    }}
+                                  >
+                                    修改
+                                  </Button>
+                                }
+                              </div>
+                            </div>
+                          </li>
+                        ))}
                     </ul>
                   </Col>
                   <Col span={11} style={{ color: "#fff", marginLeft: 40 }}>
@@ -355,7 +372,7 @@ export default function SetUp() {
                         height: 300,
                         overflow: "hidden",
                         borderRadius: 15,
-                        marginLeft:30
+                        marginLeft: 30,
                       }}
                     >
                       <TextArea
@@ -368,7 +385,7 @@ export default function SetUp() {
                           // color: "#fff",
                           fontSize: 16,
                         }}
-                        defaultValue="大家好，我是罗世杰，是销售一部的主管，工作上有什么事情大家互相帮助"
+                        defaultValue={personalInfo && personalInfo.businesscard}
                       />
                     </div>
                   </Col>
@@ -408,8 +425,8 @@ export default function SetUp() {
                         padding: "0",
                       }}
                     >
-                      {listdata.map((item) => (
-                        <div style={{ color: "#fff" }}>
+                      {listdata.map((item, index) => (
+                        <div style={{ color: "#fff" }} key={index}>
                           <li
                             style={{
                               listStyle: "none",

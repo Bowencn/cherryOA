@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   BellOutlined,
   MailOutlined,
   MoreOutlined,
   DownOutlined,
 } from "@ant-design/icons";
+import conf from "../server.conf";
 import { Layout, Menu, Dropdown, Avatar, Row, Col, Badge, Input } from "antd";
 const { Header } = Layout;
 const { Search } = Input;
-export default function HeaderBar() {
+export default function HeaderBar(props) {
+  const [personalInfo,setPersonalInfo] = useState(props)
+  console.log(personalInfo)
   const menu = (
     <Menu>
       <Menu.Item key="0">
@@ -38,7 +41,7 @@ export default function HeaderBar() {
           <Avatar
             style={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
             size={52}
-            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594979356642&di=7468eb82feb7ede61b658e56e104757a&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201901%2F17%2F20190117230425_eofqv.thumb.700_0.jpg"
+            src={conf.address+personalInfo.userimg}
           ></Avatar>
         </Col>
 
@@ -50,7 +53,7 @@ export default function HeaderBar() {
               style={{ color: "#fff" }}
               href="#!"
             >
-              王小天 <DownOutlined style={{ paddingLeft: 10 }} />
+              {personalInfo.name} <DownOutlined style={{ paddingLeft: 10 }} />
             </a>
           </Dropdown>
         </Col>

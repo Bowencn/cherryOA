@@ -23,6 +23,7 @@ const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 function App(props) {
   const [logOut, setLogOut] = useState(false);
+  const [personalInfo,setPersonalInfo] = useState(props.location.query)
   const logOutfn = async () => {
     setLogOut(true);
     await setTimeout(() => {
@@ -30,6 +31,7 @@ function App(props) {
       props.history.push("/login");
     }, 1000);
   };
+  console.log(personalInfo)
   return (
     <Router>
       {logOut ? (
@@ -200,7 +202,7 @@ function App(props) {
                 <Link to="/ClockIn" />
               </Menu.Item>
               <Menu.Item key="10" icon={<UserOutlined />}>
-                <Link to="/SetUp" />
+                <Link to={{pathname:"/setup",query:{id:personalInfo&&personalInfo.id} }}/>
                 设置
               </Menu.Item>
               <Menu.Item key="11" icon={<UserOutlined />} onClick={logOutfn}>
@@ -213,7 +215,7 @@ function App(props) {
             </Menu>
           </Sider>
           <Layout>
-            <HeaderBar />
+            <HeaderBar {...personalInfo}/>
             <Content
               className="site-layout-background"
               style={{
