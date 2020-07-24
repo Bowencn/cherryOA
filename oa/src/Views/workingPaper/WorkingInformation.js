@@ -428,7 +428,7 @@ export default function WorkingInformation() {
                   }}
                 >
                   <div style={{ marginTop: 10 }}>
-                    <span style={{ fontSize: 18 }}>客户联系资料图表</span>
+                    <span style={{ fontSize: 18 }}>客户资料文件</span>
                     <span style={{ marginLeft: 40 }}>2020-07-10</span>
                   </div>
                   <span style={{ marginTop: 15 }}>五月份公司谈判客户资料</span>

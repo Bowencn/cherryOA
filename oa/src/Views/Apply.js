@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 import { Row, Col, Form, Input, Button } from "antd";
 import { AccountBookOutlined } from "@ant-design/icons";
+import axios from "axios";
+import conf from "../server.conf";
 export default function Apply() {
   const [headTitle, setHeadTitle] = useState("报销申请");
+  const [form] = Form.useForm();
+
+  const submitForm = async(data) => {
+      const res = await axios.post(`${conf.address}/api/apply`,data);
+      console.log(res);
+  };
+  const onFinish = (values) => {
+    values.title = headTitle
+    console.log(values);
+    submitForm(values)
+  };
   const layout = {
     labelCol: { span: 4 },
     wrapperCol: { span: 20 },
@@ -155,6 +168,8 @@ export default function Apply() {
         <Form
           {...layout}
           name="basic"
+          form={form}
+          onFinish={onFinish}
           initialValues={{ remember: true }}
           style={{ color: "#fff", padding: "50px 50px" }}
         >
@@ -171,33 +186,39 @@ export default function Apply() {
                     borderColor: "rgb(20,119,114)",
                     borderRadius: 5,
                     backgroundColor: "#010d24",
-                    color:'#fff',
+                    color: "#fff",
                   }}
                 />
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item label={<div style={{ color: "#fff" }}>金额</div>}>
+              <Form.Item
+                label={<div style={{ color: "#fff" }}>金额</div>}
+                name="sum"
+              >
                 <Input
                   style={{
                     width: 300,
                     borderColor: "rgb(20,119,114)",
                     borderRadius: 5,
                     backgroundColor: "#010d24",
-                    color:'#fff',
+                    color: "#fff",
                   }}
                 />
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item label={<div style={{ color: "#fff" }}>付款方式</div>}>
+              <Form.Item
+                label={<div style={{ color: "#fff" }}>付款方式</div>}
+                name="paymentMethod"
+              >
                 <Input
                   style={{
                     width: 300,
                     borderColor: "rgb(20,119,114)",
                     borderRadius: 5,
                     backgroundColor: "#010d24",
-                    color:'#fff',
+                    color: "#fff",
                   }}
                 />
               </Form.Item>
@@ -205,40 +226,49 @@ export default function Apply() {
           </Row>
           <Row>
             <Col span={8}>
-              <Form.Item label={<div style={{ color: "#fff" }}>日期</div>}>
+              <Form.Item
+                label={<div style={{ color: "#fff" }}>日期</div>}
+                name="date"
+              >
                 <Input
                   style={{
                     width: 300,
                     borderColor: "rgb(20,119,114)",
                     borderRadius: 5,
                     backgroundColor: "#010d24",
-                    color:'#fff',
+                    color: "#fff",
                   }}
                 />
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item label={<div style={{ color: "#fff" }}>类型</div>}>
+              <Form.Item
+                label={<div style={{ color: "#fff" }}>类型</div>}
+                name="type"
+              >
                 <Input
                   style={{
                     width: 300,
                     borderColor: "rgb(20,119,114)",
                     borderRadius: 5,
                     backgroundColor: "#010d24",
-                    color:'#fff',
+                    color: "#fff",
                   }}
                 />
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item label={<div style={{ color: "#fff" }}>所属部门</div>}>
+              <Form.Item
+                label={<div style={{ color: "#fff" }}>所属部门</div>}
+                name="department"
+              >
                 <Input
                   style={{
                     width: 300,
                     borderColor: "rgb(20,119,114)",
                     borderRadius: 5,
                     backgroundColor: "#010d24",
-                    color:'#fff',
+                    color: "#fff",
                   }}
                 />
               </Form.Item>
@@ -246,6 +276,7 @@ export default function Apply() {
           </Row>
           <Form.Item
             label={<div style={{ color: "#fff" }}>明细</div>}
+            name="detailed"
             {...textLayout}
             style={{ marginLeft: 25, paddingRight: 30 }}
           >
@@ -253,7 +284,7 @@ export default function Apply() {
               rows={12}
               style={{
                 resize: "none",
-                color:'#fff',
+                color: "#fff",
                 borderColor: "rgb(20,119,114)",
                 borderRadius: 5,
                 backgroundColor: "#010d24",
@@ -261,7 +292,16 @@ export default function Apply() {
             />
           </Form.Item>
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit" style={{ marginLeft: "-20px",backgroundColor:'rgb(20,119,114)',borderColor:'rgb(20,119,114)' }}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{
+                marginLeft: "-20px",
+                backgroundColor: "rgb(20,119,114)",
+                borderColor: "rgb(20,119,114)",
+              }}
+              // onClick={submit}
+            >
               提交
             </Button>
           </Form.Item>
