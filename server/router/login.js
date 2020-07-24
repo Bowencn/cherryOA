@@ -1,10 +1,10 @@
 const express =require('express')
-const login = express.Router()
-login.use((req, res, next) => {
+const router = express.Router()
+router.use((req, res, next) => {
     console.log(`路由执行成功啦~~~`, Date.now());
     next()
   })
-login.post('/',(req,res)=>{
+router.post('/',(req,res)=>{
     console.log(req.body)
     res.json({
         code: 200,
@@ -25,7 +25,7 @@ login.post('/',(req,res)=>{
         }
     })
 })
-// login.get('/:id',(req,res)=>{
+// router.get('/:id',(req,res)=>{
 //     res.json({
 //         code: 200,
 //         data: {
@@ -38,4 +38,4 @@ login.post('/',(req,res)=>{
 //         }
 //     })
 // })
-module.exports = login
+module.exports = router

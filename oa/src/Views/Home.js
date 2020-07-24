@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Row, Col } from "antd";
+import { Card, Row, Col, Progress } from "antd";
 import {
   LineChartOutlined,
   PayCircleOutlined,
@@ -7,129 +7,35 @@ import {
   FieldTimeOutlined,
 } from "@ant-design/icons";
 import { GroupedColumn, Pie } from "@ant-design/charts";
+import axios from "axios";
+import conf from "../server.conf";
 export default function Home() {
-  const data = [
-    {
-      name: "满意",
-      月份: "一月",
-      月均降雨量: 18,
-    },
-    {
-      name: "满意",
-      月份: "二月",
-      月均降雨量: 28,
-    },
-    {
-      name: "满意",
-      月份: "三月",
-      月均降雨量: 39,
-    },
-    {
-      name: "满意",
-      月份: "四月",
-      月均降雨量: 81,
-    },
-    {
-      name: "满意",
-      月份: "五月",
-      月均降雨量: 47,
-    },
-    {
-      name: "满意",
-      月份: "六月",
-      月均降雨量: 20,
-    },
-    {
-      name: "满意",
-      月份: "七月.",
-      月均降雨量: 24,
-    },
-    {
-      name: "满意",
-      月份: "八月",
-      月均降雨量: 35,
-    },
-    {
-      name: "满意",
-      月份: "九月",
-      月均降雨量: 40,
-    },
-    {
-      name: "满意",
-      月份: "十月",
-      月均降雨量: 45,
-    },
-    {
-      name: "满意",
-      月份: "十一月",
-      月均降雨量: 50,
-    },
-    {
-      name: "满意",
-      月份: "十二月",
-      月均降雨量: 30,
-    },
-    {
-      name: "不满意",
-      月份: "一月",
-      月均降雨量: 12,
-    },
-    {
-      name: "不满意",
-      月份: "二月",
-      月均降雨量: 23,
-    },
-    {
-      name: "不满意",
-      月份: "三月",
-      月均降雨量: 34,
-    },
-    {
-      name: "不满意",
-      月份: "四月",
-      月均降雨量: 99,
-    },
-    {
-      name: "不满意",
-      月份: "五月",
-      月均降雨量: 52,
-    },
-    {
-      name: "不满意",
-      月份: "六月",
-      月均降雨量: 35,
-    },
-    {
-      name: "不满意",
-      月份: "七月.",
-      月均降雨量: 37,
-    },
-    {
-      name: "不满意",
-      月份: "八月",
-      月均降雨量: 42,
-    },
-    {
-      name: "不满意",
-      月份: "九月",
-      月均降雨量: 36,
-    },
-    {
-      name: "不满意",
-      月份: "十月",
-      月均降雨量: 38,
-    },
-    {
-      name: "不满意",
-      月份: "十一月",
-      月均降雨量: 30,
-    },
-    {
-      name: "不满意",
-      月份: "十二月",
-      月均降雨量: 20,
-    },
-  ];
+  const [overView, setOverView] = useState();
+  const [cityData, setcityData] = useState();
+  const [attitudeData, setAttitudeData] = useState();
+  useEffect(() => {
+    const login = async () => {
+      const res = await axios.get(`${conf.address}/api/overview`);
+      console.log(res.data.data.entity);
+      setOverView(res.data.data.entity);
+      // return res.data.data.entity;
+    };
+    const city = async () => {
+      const res = await axios.get(`${conf.address}/api/customer/city`);
+      console.log(res.data.data.list);
+      setcityData(res.data.data.list);
+      // return res.data.data.entity;
+    };
+    const attitude = async () => {
+      const res = await axios.get(`${conf.address}/api/customer/attitude`);
+      console.log(res.data.data.list);
+      setAttitudeData(res.data.data.list);
+      // return res.data.data.entity;
+    };
+    login();
+    city();
+    attitude();
+  }, []);
   const config = {
     height: 770,
     renderer: "svg",
@@ -154,7 +60,7 @@ export default function Home() {
       text: { style: { fill: "#fff", fontSize: 16 } },
     },
     forceFit: true,
-    data,
+    data: attitudeData,
     xField: "月份",
     yField: "月均降雨量",
     yAxis: {
@@ -204,24 +110,6 @@ export default function Home() {
     groupField: "name",
     color: ["rgb(1,121,255)", "rgb(7,88,183)"],
   };
-  const piedata = [
-    {
-      type: "成都",
-      value: 15,
-    },
-    {
-      type: "绵阳",
-      value: 35,
-    },
-    {
-      type: "德阳",
-      value: 25,
-    },
-    {
-      type: "南充",
-      value: 25,
-    },
-  ];
   const pieconfig = {
     height: 770,
     renderer: "svg",
@@ -244,7 +132,7 @@ export default function Home() {
       },
     },
     radius: 0.8,
-    data: piedata,
+    data: cityData,
     angleField: "value",
     colorField: "type",
     color: ["#29c4b1", "#ff7d3e", "#3b9bf8", "#b65dee"],
@@ -288,7 +176,7 @@ export default function Home() {
                 textAlign: "center",
               }}
             >
-              <p>2000万</p>
+              <p>{overView && overView.salesPerformance}万</p>
               <p>销售业绩</p>
             </div>
           </Card>
@@ -318,7 +206,7 @@ export default function Home() {
                 textAlign: "center",
               }}
             >
-              <p>75%</p>
+              <p>{overView && overView.salesProfit}%</p>
               <p>销售利润</p>
             </div>
           </Card>
@@ -348,7 +236,7 @@ export default function Home() {
                 textAlign: "center",
               }}
             >
-              <p>500笔</p>
+              <p>{overView && overView.numberOfTransactions}笔</p>
               <p>成交笔数</p>
             </div>
           </Card>
@@ -378,7 +266,7 @@ export default function Home() {
                 textAlign: "center",
               }}
             >
-              <p>97%</p>
+              <p>{overView && overView.attendance}%</p>
               <p>出勤率</p>
             </div>
           </Card>
@@ -393,7 +281,7 @@ export default function Home() {
               borderRadius: 10,
             }}
           >
-            <GroupedColumn {...config} />
+            {attitudeData && <GroupedColumn {...config} />}
           </div>
         </Col>
         <Col span={9}>
@@ -404,7 +292,7 @@ export default function Home() {
               borderRadius: 10,
             }}
           >
-            <Pie {...pieconfig} />
+            {cityData && <Pie {...pieconfig} />}
           </div>
         </Col>
       </Row>

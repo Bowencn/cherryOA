@@ -238,7 +238,7 @@ export default function WorkingInformation() {
     forceFit: true,
     title: {
       visible: true,
-      text: "客户区域分布图",
+      text: "五月客户谈判情况统计图",
       style: {
         fill: "#fff",
         fontSize: 18,

@@ -1,10 +1,10 @@
 const express = require("express");
-const user = express.Router();
-user.use((req, res, next) => {
+const router = express.Router();
+router.use((req, res, next) => {
   console.log(`路由执行成功啦~~~`, Date.now());
   next();
 });
-user.get("/", (req, res) => {
+router.get("/", (req, res) => {
   res.json({
     code: 200,
     data: {
@@ -17,7 +17,7 @@ user.get("/", (req, res) => {
     },
   });
 });
-user.get("/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   console.log("userId:", req.params.id);
   let userId = req.params.id;
   if (userId == 1) {
@@ -50,4 +50,4 @@ user.get("/:id", (req, res) => {
     })
   }
 });
-module.exports = user;
+module.exports = router;
