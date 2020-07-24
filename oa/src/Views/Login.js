@@ -24,9 +24,11 @@ export default function Login(props) {
   };
   const onFinish = async (values) => {
     console.log("Success:", values);
-    console.log(props);
+    // console.log(localStorage);
+
     let data = await login(values);
     console.log(data);
+    window.localStorage.setItem('user-id', data.id);
     props.history.push({
       pathname: "/",
       query: data,

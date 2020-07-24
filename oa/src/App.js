@@ -28,10 +28,10 @@ function App(props) {
     setLogOut(true);
     await setTimeout(() => {
       setLogOut(false);
+      window.localStorage.removeItem("user-id");
       props.history.push("/login");
     }, 1000);
   };
-  console.log(personalInfo)
   return (
     <Router>
       {logOut ? (

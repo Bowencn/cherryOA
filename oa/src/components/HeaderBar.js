@@ -11,7 +11,6 @@ const { Header } = Layout;
 const { Search } = Input;
 export default function HeaderBar(props) {
   const [personalInfo,setPersonalInfo] = useState(props)
-  console.log(personalInfo)
   const menu = (
     <Menu>
       <Menu.Item key="0">
