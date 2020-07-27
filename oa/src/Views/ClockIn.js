@@ -14,13 +14,60 @@ import {
 import { ClockCircleOutlined } from "@ant-design/icons";
 import moment from "moment";
 import "moment/locale/zh-cn";
+import axios from "axios";
+import conf from "../server.conf";
 moment.locale("zh-cn");
-export default function ClockIn() {
+export default function ClockIn(props) {
   const { TextArea } = Input;
   const { RangePicker } = DatePicker;
   const [currentDate] = useState(
     new Date().getFullYear() + "年" + (new Date().getMonth() + 1) + "月"
   );
+  const [clockInData, setClockInData] = useState();
+  const [clockInState, setClockInState] = useState(0);
+  const [propsData, setPropsData] = useState(props.location.query.data);
+  const [dateNow, setDateNow] = useState(moment().format("HH:mm:ss"));
+  useEffect(() => {
+    setTimeout(() => {
+      setDateNow(moment().format("HH:mm:ss"));
+    }, 1000);
+  });
+  useEffect(() => {
+    const clockIn = async () => {
+      const res = await axios.get(`${conf.address}/api/clockIn`);
+      console.log(res.data.data.entity);
+      setClockInData(res.data.data.entity);
+      setClockInState(res.data.data.entity.state)
+      // return res.data.data.entity;
+    };
+    clockIn();
+  }, []);
+  // useEffect(() => {
+  //   const volume = async () => {
+  //     const res = await axios.get(`${conf.address}/api/customer/volume`);
+  //     console.log(res.data.data.list);
+  //     setVolume(res.data.data.list);
+  //     // return res.data.data.entity;
+  //   };
+  //   const logBook = async () => {
+  //     const res = await axios.post(`${conf.address}/api/message/logBook`,{id:1});
+  //     console.log(res.data.data.entity);
+  //     setLogBook(res.data.data.entity.content);
+  //     // return res.data.data.entity;
+  //   };
+  //   const departmentReport = async () => {
+  //     const res = await axios.get(
+  //       `${conf.address}/api/message/departmentReport`
+  //     );
+  //     console.log(res.data.data.list);
+  //     setDepartmentReport(res.data.data.list);
+  //     // return res.data.data.entity;
+  //   };
+  //   // clockIn();
+  //   // volume();
+  //   // logBook();
+  //   // departmentReport();
+  // }, []);
   const HorizontalLoginForm = () => {
     const [form] = Form.useForm();
     const [, forceUpdate] = useState();
@@ -31,7 +78,6 @@ export default function ClockIn() {
     const onFinish = (values) => {
       console.log("Finish:", values);
     };
-
     return (
       <Form
         form={form}
@@ -59,11 +105,11 @@ export default function ClockIn() {
             <Button
               type="primary"
               htmlType="submit"
-              disabled={
-                !form.isFieldsTouched(true) ||
-                form.getFieldsError().filter(({ errors }) => errors.length)
-                  .length
-              }
+              // disabled={
+              //   !form.isFieldsTouched(true) ||
+              //   form.getFieldsError().filter(({ errors }) => errors.length)
+              //     .length
+              // }
             >
               查询
             </Button>
@@ -71,6 +117,20 @@ export default function ClockIn() {
         </Form.Item>
       </Form>
     );
+  };
+
+  const clockIn = async () => {
+    console.log(props);
+    let data = {
+      name: props.location.query.data.name,
+      time: moment(),
+      place: "科技之光大厦",
+      state: !clockInState,
+    };
+    const res = await axios.post(`${conf.address}/api/clockIn`, data);
+    console.log(res.data.data.entity);
+    // setClockInData(res.data.data.entity);
+    // return res.data.data.entity;
   };
   const Card = (config) => {
     return (
@@ -235,7 +295,10 @@ export default function ClockIn() {
                         fontSize: 16,
                       }}
                     >
-                      打卡时间08:46:35
+                      {"打卡时间" +
+                        moment(clockInData && clockInData.time).format(
+                          "HH:mm:ss"
+                        )}
                     </div>
                     <div
                       style={{
@@ -252,8 +315,8 @@ export default function ClockIn() {
                           position: "absolute",
                           top: 7,
                         }}
-                      ></div>
-                      科技之光大厦
+                      />
+                      {clockInData&&clockInData.place}
                     </div>
                   </div>
                   <div
@@ -318,6 +381,7 @@ export default function ClockIn() {
                         paddingTop: 25,
                         paddingLeft: 25,
                       }}
+                      onClick={clockIn}
                     >
                       <div
                         style={{
@@ -332,7 +396,7 @@ export default function ClockIn() {
                             paddingTop: 20,
                           }}
                         >
-                          下班打卡
+                          {clockInState ? "下班打卡" : "上班打卡"}
                         </div>
                         <div
                           style={{
@@ -342,7 +406,7 @@ export default function ClockIn() {
                             paddingTop: 5,
                           }}
                         >
-                          18:15:36
+                          {dateNow}
                         </div>
                         <div
                           style={{
@@ -373,7 +437,7 @@ export default function ClockIn() {
                             paddingLeft: 48,
                           }}
                         >
-                          王小天
+                          {propsData.name}
                         </div>
                       </div>
                     </div>

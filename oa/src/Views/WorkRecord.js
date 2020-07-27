@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Row,
   Col,
@@ -14,8 +14,46 @@ import {
 } from "antd";
 import { Column } from "@ant-design/charts";
 import moment from "moment";
+import axios from "axios";
+import conf from "../server.conf";
 
 export default function WorkRecord() {
+  const [trainingSignIn, setTrainingSignIn] = useState();
+  const [volume, setVolume] = useState();
+  const [logBook, setLogBook] = useState();
+  const [departmentReport, setDepartmentReport] = useState();
+  useEffect(() => {
+    const trainingSignIn = async () => {
+      const res = await axios.get(`${conf.address}/api/staff/trainingSignIn`);
+      console.log(res.data.data.list);
+      setTrainingSignIn(res.data.data.list);
+      // return res.data.data.entity;
+    };
+    const volume = async () => {
+      const res = await axios.get(`${conf.address}/api/customer/volume`);
+      console.log(res.data.data.list);
+      setVolume(res.data.data.list);
+      // return res.data.data.entity;
+    };
+    const logBook = async () => {
+      const res = await axios.post(`${conf.address}/api/message/logBook`,{id:1});
+      console.log(res.data.data.entity);
+      setLogBook(res.data.data.entity.content);
+      // return res.data.data.entity;
+    };
+    const departmentReport = async () => {
+      const res = await axios.get(
+        `${conf.address}/api/message/departmentReport`
+      );
+      console.log(res.data.data.list);
+      setDepartmentReport(res.data.data.list);
+      // return res.data.data.entity;
+    };
+    trainingSignIn();
+    volume();
+    logBook();
+    departmentReport();
+  }, []);
   const columns = [
     {
       title: "姓名",
@@ -44,170 +82,10 @@ export default function WorkRecord() {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      name: "John Brown",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售一部",
-      position: "销售经理",
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售二部",
-      position: "市场专员",
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售三部",
-      position: "市场专员",
-    },
-    {
-      key: "4",
-      name: "John Brown",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售一部",
-      position: "销售经理",
-    },
-    {
-      key: "5",
-      name: "Jim Green",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售二部",
-      position: "市场专员",
-    },
-    {
-      key: "6",
-      name: "Joe Black",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售三部",
-      position: "市场专员",
-    },
-    {
-      key: "7",
-      name: "John Brown",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售一部",
-      position: "销售经理",
-    },
-    {
-      key: "8",
-      name: "Jim Green",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售二部",
-      position: "市场专员",
-    },
-    {
-      key: "9",
-      name: "Joe Black",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售三部",
-      position: "市场专员",
-    },
-    {
-      key: "10",
-      name: "John Brown",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售一部",
-      position: "销售经理",
-    },
-    {
-      key: "11",
-      name: "Jim Green",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售二部",
-      position: "市场专员",
-    },
-    {
-      key: "12",
-      name: "Joe Black",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售三部",
-      position: "市场专员",
-    },
-    {
-      key: "13",
-      name: "John Brown",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售一部",
-      position: "销售经理",
-    },
-    {
-      key: "14",
-      name: "Jim Green",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售二部",
-      position: "市场专员",
-    },
-    {
-      key: "15",
-      name: "Joe Black",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售三部",
-      position: "市场专员",
-    },
-    {
-      key: "16",
-      name: "John Brown",
-      CheckInTime: "15:37",
-      TrainingLocation: "会议室",
-      Department: "销售一部",
-      position: "销售经理",
-    },
-  ];
-  const Columndata = [
-    {
-      type: "一区",
-      sales: 38,
-    },
-    {
-      type: "二区",
-      sales: 52,
-    },
-    {
-      type: "三区",
-      sales: 61,
-    },
-    {
-      type: "四区",
-      sales: 145,
-    },
-    {
-      type: "五区",
-      sales: 48,
-    },
-    {
-      type: "六区",
-      sales: 38,
-    },
-    {
-      type: "七区",
-      sales: 38,
-    },
-  ];
-  const Columnconfig = {
+  const volumeConfig = {
     renderer: "svg",
     forceFit: true,
-    data: Columndata,
+    data: volume,
     padding: "auto",
     xField: "type",
     yField: "sales",
@@ -285,20 +163,6 @@ export default function WorkRecord() {
       </div>
     );
   };
-  const listdata = [
-    {
-      title: "Ant Design Title 1",
-    },
-    {
-      title: "Ant Design Title 2",
-    },
-    {
-      title: "Ant Design Title 3",
-    },
-    {
-      title: "Ant Design Title 4",
-    },
-  ];
   return (
     <div>
       <Row gutter={28} style={{ marginLeft: 30 }}>
@@ -307,7 +171,7 @@ export default function WorkRecord() {
             <Table
               pagination={false}
               columns={columns}
-              dataSource={data}
+              dataSource={trainingSignIn}
               style={{
                 background: "rgb(1,13,37)",
               }}
@@ -316,7 +180,7 @@ export default function WorkRecord() {
         </Col>
         <Col span={11}>
           <Card height={468} title={"2020年上半年客户成交量统计"}>
-            <Column {...Columnconfig} />
+            {volume && <Column {...volumeConfig} />}
           </Card>
         </Col>
       </Row>
@@ -328,7 +192,8 @@ export default function WorkRecord() {
                 // readonly="readonly"
                 style={{
                   /* 实现横线效果 */
-                  background: "linear-gradient(transparent 95%, rgb(20,119,114) 0)",
+                  background:
+                    "linear-gradient(transparent 95%, rgb(20,119,114) 0)",
                   lineHeight: "3.4em",
                   backgroundSize: "100% 3em",
                   backgroundAttachment:
@@ -347,7 +212,7 @@ export default function WorkRecord() {
                   padding: "0 10px",
                 }}
               >
-                销售一部午饭后集体去会议室，集体培训一小时，带上笔记
+                {logBook}
               </textarea>
             </div>
           </Card>
@@ -356,30 +221,33 @@ export default function WorkRecord() {
           <Card height={468} title={"部门报告"}>
             <List
               itemLayout="horizontal"
-              dataSource={listdata}
+              dataSource={departmentReport}
               renderItem={(item) => (
                 <List.Item style={{ padding: 10 }}>
                   <Comment
                     //   actions={actions}
                     style={{ color: "#fff", textAlign: "left" }}
-                    author={<a style={{ color: "#fff" }}>Han Solo</a>}
+                    author={
+                      <a style={{ color: "#fff" }} src="#!">
+                        {item.name}
+                      </a>
+                    }
                     avatar={
                       <Avatar
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                        alt="Han Solo"
+                        src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1607579915,1915864702&fm=26&gp=0.jpg"
+                        alt={item.name}
                       />
                     }
-                    content={
-                      <p>
-                        We supply a series of design principles, practical
-                        patterns and high quality design resources (Sketch and
-                        Axure), to help people create their product prototypes
-                        beautifully and efficiently.
-                      </p>
-                    }
+                    content={<p>{item.content}</p>}
                     datetime={
-                      <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-                        <span>{moment().fromNow()}</span>
+                      <Tooltip
+                        title={moment(item.date + " " + item.time).format(
+                          "YYYY-MM-DD HH:mm:ss"
+                        )}
+                      >
+                        <span>
+                          {moment(item.date + " " + item.time).fromNow()}
+                        </span>
                       </Tooltip>
                     }
                   />

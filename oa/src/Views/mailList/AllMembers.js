@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Row,
   Col,
@@ -18,10 +18,22 @@ import {
   DownOutlined,
   RightOutlined,
 } from "@ant-design/icons";
+import axios from "axios";
+import conf from "../../server.conf";
 const { Search } = Input;
 export default function AllMembers() {
   const [selectionType, setSelectionType] = useState("checkbox");
 
+  const [staff, setStaff] = useState();
+  useEffect(() => {
+    const staff = async () => {
+      const res = await axios.get(`${conf.address}/api/staff`);
+      console.log(res.data.data.list);
+      setStaff(res.data.data.list);
+      // return res.data.data.entity;
+    };
+    staff()
+  }, []);
   const columns = [
     {
       title: "姓名",
@@ -60,168 +72,6 @@ export default function AllMembers() {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      name: "John Brown",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售一部",
-      position: "销售经理",
-      entryTime: "2012-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售二部",
-      position: "市场专员",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售三部",
-      position: "市场专员",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "4",
-      name: "John Brown",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售一部",
-      position: "销售经理",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "5",
-      name: "Jim Green",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售二部",
-      position: "市场专员",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "6",
-      name: "Joe Black",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售三部",
-      position: "市场专员",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "7",
-      name: "John Brown",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售一部",
-      position: "销售经理",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "8",
-      name: "Jim Green",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售二部",
-      position: "市场专员",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "9",
-      name: "Joe Black",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售三部",
-      position: "市场专员",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "10",
-      name: "John Brown",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售一部",
-      position: "销售经理",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "11",
-      name: "Jim Green",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售二部",
-      position: "市场专员",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "12",
-      name: "Joe Black",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售三部",
-      position: "市场专员",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "13",
-      name: "John Brown",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售一部",
-      position: "销售经理",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "14",
-      name: "Jim Green",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售二部",
-      position: "市场专员",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "15",
-      name: "Joe Black",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售三部",
-      position: "市场专员",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-    {
-      key: "16",
-      name: "John Brown",
-      phoneNum: "13300009999",
-      sex: "男",
-      Department: "销售一部",
-      position: "销售经理",
-      entryTime: "2016-05-22",
-      workingYears: "4",
-    },
-  ];
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       console.log(
@@ -319,7 +169,7 @@ export default function AllMembers() {
           // pagination={false}
           pagination={{ pageSize: 14}}
           columns={columns}
-          dataSource={data}
+          dataSource={staff}
           style={{
             background: "rgb(1,13,37)",
             padding: 20,

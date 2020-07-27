@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Row,
@@ -9,7 +9,7 @@ import {
   Button,
   Timeline,
   Badge,
-  DatePicker,
+  Skeleton,
 } from "antd";
 import {
   FileTextOutlined,
@@ -19,7 +19,31 @@ import {
   FileSearchOutlined,
 } from "@ant-design/icons";
 import { Pie } from "@ant-design/charts";
+import axios from "axios";
+import conf from "../../server.conf";
 export default function WorkingInformation() {
+  const [informationDocument, setInformationDocument] = useState();
+  const [negotiations, setNegotiations] = useState();
+  useEffect(() => {
+    const informationDocument = async () => {
+      const res = await axios.get(
+        `${conf.address}/api/customer/informationDocument`
+      );
+      console.log(res.data.data.list);
+      setInformationDocument(res.data.data.list);
+      // return res.data.data.entity;
+    };
+    const negotiations = async () => {
+      const res = await axios.get(
+        `${conf.address}/api/customer/negotiations`
+      );
+      console.log(res.data.data.list);
+      setNegotiations(res.data.data.list);
+      // return res.data.data.entity;
+    };
+    informationDocument();
+    negotiations();
+  }, []);
   const Card = (config) => {
     return (
       <div
@@ -88,150 +112,6 @@ export default function WorkingInformation() {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      name: "John Brown",
-      phoneNumber: "133-0000-2200",
-      executiveDirector: "思瑶",
-      RegionalScope: "成华区",
-      sex: "男",
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      phoneNumber: "188-4077-6578",
-      executiveDirector: "王小天",
-      RegionalScope: "云龙区",
-      sex: "女",
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      phoneNumber: "148-2456-2215",
-      executiveDirector: "苏白",
-      RegionalScope: "白虎区",
-      sex: "女",
-    },
-    {
-      key: "4",
-      name: "John Brown",
-      phoneNumber: "133-0000-2200",
-      executiveDirector: "思瑶",
-      RegionalScope: "成华区",
-      sex: "男",
-    },
-    {
-      key: "5",
-      name: "Jim Green",
-      phoneNumber: "188-4477-6578",
-      executiveDirector: "王小天",
-      RegionalScope: "云龙区",
-      sex: "女",
-    },
-    {
-      key: "6",
-      name: "Joe Black",
-      phoneNumber: "148-2456-2215",
-      executiveDirector: "苏白",
-      RegionalScope: "白虎区",
-      sex: "女",
-    },
-    {
-      key: "7",
-      name: "John Brown",
-      phoneNumber: "133-0000-2200",
-      executiveDirector: "思瑶",
-      RegionalScope: "成华区",
-      sex: "男",
-    },
-    {
-      key: "8",
-      name: "Jim Green",
-      phoneNumber: "188-4477-6578",
-      executiveDirector: "王小天",
-      RegionalScope: "云龙区",
-      sex: "女",
-    },
-    {
-      key: "9",
-      name: "Joe Black",
-      phoneNumber: "148-2456-2215",
-      executiveDirector: "苏白",
-      RegionalScope: "白虎区",
-      sex: "女",
-    },
-    {
-      key: "10",
-      name: "John Brown",
-      phoneNumber: "133-0000-2200",
-      executiveDirector: "思瑶",
-      RegionalScope: "成华区",
-      sex: "男",
-    },
-    {
-      key: "11",
-      name: "Jim Green",
-      phoneNumber: "188-4477-6578",
-      executiveDirector: "王小天",
-      RegionalScope: "云龙区",
-      sex: "女",
-    },
-    {
-      key: "12",
-      name: "Joe Black",
-      phoneNumber: "148-2456-2215",
-      executiveDirector: "苏白",
-      RegionalScope: "白虎区",
-      sex: "女",
-    },
-    {
-      key: "13",
-      name: "John Brown",
-      phoneNumber: "133-0000-2200",
-      executiveDirector: "思瑶",
-      RegionalScope: "成华区",
-      sex: "男",
-    },
-    {
-      key: "14",
-      name: "Jim Green",
-      phoneNumber: "188-4477-6578",
-      executiveDirector: "王小天",
-      RegionalScope: "云龙区",
-      sex: "女",
-    },
-    {
-      key: "15",
-      name: "Joe Black",
-      phoneNumber: "148-2456-2215",
-      executiveDirector: "苏白",
-      RegionalScope: "白虎区",
-      sex: "女",
-    },
-    {
-      key: "16",
-      name: "John Brown",
-      phoneNumber: "133-0000-2200",
-      executiveDirector: "思瑶",
-      RegionalScope: "成华区",
-      sex: "男",
-    },
-  ];
-  const piedata = [
-    {
-      type: "有意向客户",
-      value: 15,
-    },
-    {
-      type: "考虑中客户",
-      value: 35,
-    },
-    {
-      type: "合作客户",
-      value: 25,
-    }
-  ];
   const pieconfig = {
     height: 300,
     renderer: "svg",
@@ -254,7 +134,7 @@ export default function WorkingInformation() {
       },
     },
     radius: 0.8,
-    data: piedata,
+    data: negotiations,
     angleField: "value",
     colorField: "type",
     color: ["#29c4b1", "#ff7d3e", "#3b9bf8", "#b65dee"],
@@ -506,15 +386,17 @@ export default function WorkingInformation() {
               </Row>
             }
           >
-            <Table
-              pagination={false}
-              columns={columns}
-              dataSource={data}
-              style={{
-                background: "rgb(1,13,37)",
-              }}
-              // scroll={{ y: '100vh'}}
-            />
+            {informationDocument && (
+              <Table
+                pagination={false}
+                columns={columns}
+                dataSource={informationDocument}
+                style={{
+                  background: "rgb(1,13,37)",
+                }}
+                // scroll={{ y: '100vh'}}
+              />
+            )}
           </Card>
           <Row style={{ marginTop: 20 }}>
             <Col span={12} style={{ paddingRight: 12 }}>
@@ -530,15 +412,58 @@ export default function WorkingInformation() {
                     height: 300,
                   }}
                 >
-                  <div style={{ borderBottom: "1px dashed #000", height: "30%",textAlign:'center' }}>
-                    <span style={{color:'#fff',fontSize:18,lineHeight:5}}>姓名：穆端文</span>
+                  <div
+                    style={{
+                      borderBottom: "1px dashed #000",
+                      height: "30%",
+                      textAlign: "center",
+                    }}
+                  >
+                    <span
+                      style={{ color: "#fff", fontSize: 18, lineHeight: 5 }}
+                    >
+                      姓名：穆端文
+                    </span>
                   </div>
-                  <div style={{ borderBottom: "1px dashed #000", height: "40%",display:'flex',flexDirection:'column',padding: '10px 30px' }}>
-                    <span style={{color:'#fff',fontSize:15,paddingBottom: 5,paddingTop:5}}>联系情况：有意向</span>
-                    <span style={{color:'#fff',fontSize:15,paddingBottom: 5}}>考虑问题：售后服务</span>
-                    <span style={{color:'#fff',fontSize:15,paddingBottom: 5}}>交易方式：面谈</span>
+                  <div
+                    style={{
+                      borderBottom: "1px dashed #000",
+                      height: "40%",
+                      display: "flex",
+                      flexDirection: "column",
+                      padding: "10px 30px",
+                    }}
+                  >
+                    <span
+                      style={{
+                        color: "#fff",
+                        fontSize: 15,
+                        paddingBottom: 5,
+                        paddingTop: 5,
+                      }}
+                    >
+                      联系情况：有意向
+                    </span>
+                    <span
+                      style={{ color: "#fff", fontSize: 15, paddingBottom: 5 }}
+                    >
+                      考虑问题：售后服务
+                    </span>
+                    <span
+                      style={{ color: "#fff", fontSize: 15, paddingBottom: 5 }}
+                    >
+                      交易方式：面谈
+                    </span>
                   </div>
-                  <div style={{height:"30%",padding: '5px 30px',color:'#fff'}}>5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。</div>
+                  <div
+                    style={{
+                      height: "30%",
+                      padding: "5px 30px",
+                      color: "#fff",
+                    }}
+                  >
+                    5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。
+                  </div>
                 </div>
               </div>
             </Col>
@@ -550,7 +475,7 @@ export default function WorkingInformation() {
                   borderRadius: 10,
                 }}
               >
-                <Pie {...pieconfig} />
+                {negotiations&&<Pie {...pieconfig} />}
               </div>
             </Col>
           </Row>

@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+//首页4card展示
 router.get("/", (req, res) => {
   // console.log(req.body)
   res.json({

@@ -199,7 +199,7 @@ function App(props) {
               </Menu.Item>
               <Menu.Item key="9" icon={<UserOutlined />}>
                 考勤打卡
-                <Link to="/ClockIn" />
+                <Link to={{pathname:"/clockIn",query:{data:personalInfo&&personalInfo} }}/>
               </Menu.Item>
               <Menu.Item key="10" icon={<UserOutlined />}>
                 <Link to={{pathname:"/setup",query:{id:personalInfo&&personalInfo.id} }}/>
