@@ -27,6 +27,7 @@ export default function ClockIn(props) {
   const [clockInState, setClockInState] = useState(0);
   const [propsData, setPropsData] = useState(props.location.query.data);
   const [dateNow, setDateNow] = useState(moment().format("HH:mm:ss"));
+  const [weather,setWeather] = useState()
   useEffect(() => {
     setTimeout(() => {
       setDateNow(moment().format("HH:mm:ss"));
@@ -40,7 +41,15 @@ export default function ClockIn(props) {
       setClockInState(res.data.data.entity.state)
       // return res.data.data.entity;
     };
+    const weather = async () => {
+      const res = await axios.get(`https://tianqiapi.com/api?version=v6&appid=29933195&appsecret=eRLcOS4G&vue=1`);
+      console.log(res.data);
+      // setClockInData(res.data.data.entity);
+      setWeather(res.data)
+      // return res.data.data.entity;
+    };
     clockIn();
+    weather();
   }, []);
   // useEffect(() => {
   //   const volume = async () => {
@@ -483,10 +492,10 @@ export default function ClockIn(props) {
                       marginLeft: 20,
                     }}
                   >
-                    大雨25℃
+                    {weather&&weather.wea+weather.tem+'℃'}
                   </span>
                 </div>
-                <div style={{ paddingTop: 30 }}>今日有雨，出门记得带伞哟</div>
+                  <div style={{ paddingTop: 30 }}>{weather&&weather.air_tips}</div>
               </div>
               <div style={{ color: "#fff", marginTop: 30 }}>
                 <span
