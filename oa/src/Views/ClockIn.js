@@ -20,6 +20,7 @@ moment.locale("zh-cn");
 export default function ClockIn(props) {
   const { TextArea } = Input;
   const { RangePicker } = DatePicker;
+  const [form] = Form.useForm();
   const [currentDate] = useState(
     new Date().getFullYear() + "年" + (new Date().getMonth() + 1) + "月"
   );
@@ -27,10 +28,12 @@ export default function ClockIn(props) {
   const [clockInState, setClockInState] = useState(0);
   const [propsData, setPropsData] = useState(props.location.query.data);
   const [dateNow, setDateNow] = useState(moment().format("HH:mm:ss"));
-  const [weather,setWeather] = useState()
+  const [weather, setWeather] = useState();
+  const [notice, setNotice] = useState();
+  const [clockInDataList, setClockInDataList] = useState();
   useEffect(() => {
     setTimeout(() => {
-      setDateNow(moment().format("HH:mm:ss"));
+      // setDateNow(moment().format("HH:mm:ss"));
     }, 1000);
   });
   useEffect(() => {
@@ -38,19 +41,42 @@ export default function ClockIn(props) {
       const res = await axios.get(`${conf.address}/api/clockIn`);
       console.log(res.data.data.entity);
       setClockInData(res.data.data.entity);
-      setClockInState(res.data.data.entity.state)
+      setClockInState(res.data.data.entity.state);
       // return res.data.data.entity;
     };
     const weather = async () => {
-      const res = await axios.get(`https://tianqiapi.com/api?version=v6&appid=29933195&appsecret=eRLcOS4G&vue=1`);
+      const res = await axios.get(
+        `https://tianqiapi.com/api?version=v6&appid=29933195&appsecret=eRLcOS4G&vue=1`
+      );
       console.log(res.data);
       // setClockInData(res.data.data.entity);
-      setWeather(res.data)
+      setWeather(res.data);
+      // return res.data.data.entity;
+    };
+    const notice = async () => {
+      const res = await axios.post(`${conf.address}/api/message/logBook`, {
+        id: 1,
+      });
+      console.log(res.data.data.entity.content);
+      setNotice(res.data.data.entity.content);
+      // return res.data.data.entity;
+    };
+    const clockInDataList = async () => {
+      const res = await axios.get(`${conf.address}/api/clockIn/data`);
+      console.log(res.data.data.list);
+      setClockInDataList(res.data.data.list);
       // return res.data.data.entity;
     };
     clockIn();
     weather();
+    notice();
+    clockInDataList();
   }, []);
+  const onFinish = async(values) => {
+    console.log(values);
+    const res = await axios.post(`${conf.address}/api/clockIn/cardReplacement`,values)
+    console.log(res)
+  };
   // useEffect(() => {
   //   const volume = async () => {
   //     const res = await axios.get(`${conf.address}/api/customer/volume`);
@@ -138,6 +164,7 @@ export default function ClockIn(props) {
     };
     const res = await axios.post(`${conf.address}/api/clockIn`, data);
     console.log(res.data.data.entity);
+    setClockInState(res.data.data.entity.state);
     // setClockInData(res.data.data.entity);
     // return res.data.data.entity;
   };
@@ -216,35 +243,6 @@ export default function ClockIn(props) {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      name: "John Brown",
-      workShift: "08:58:20",
-      closingTime: "18:01:00",
-      department: "销售部",
-      date: "2020-07-07",
-      state: "正常",
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      workShift: "08:58:20",
-      closingTime: "18:01:00",
-      department: "考勤部",
-      date: "2020-07-07",
-      state: "正常",
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      workShift: "08:58:20",
-      closingTime: "18:01:00",
-      department: "技术部",
-      date: "2020-07-07",
-      state: "正常",
-    },
-  ];
   return (
     <div>
       <Row gutter={28} style={{ marginLeft: 30 }}>
@@ -325,7 +323,7 @@ export default function ClockIn(props) {
                           top: 7,
                         }}
                       />
-                      {clockInData&&clockInData.place}
+                      {clockInData && clockInData.place}
                     </div>
                   </div>
                   <div
@@ -492,10 +490,12 @@ export default function ClockIn(props) {
                       marginLeft: 20,
                     }}
                   >
-                    {weather&&weather.wea+weather.tem+'℃'}
+                    {weather && weather.wea + weather.tem + "℃"}
                   </span>
                 </div>
-                  <div style={{ paddingTop: 30 }}>{weather&&weather.air_tips}</div>
+                <div style={{ paddingTop: 30 }}>
+                  {weather && weather.air_tips}
+                </div>
               </div>
               <div style={{ color: "#fff", marginTop: 30 }}>
                 <span
@@ -532,7 +532,7 @@ export default function ClockIn(props) {
                       padding: "0 10px",
                     }}
                   >
-                    销售一部午饭后集体去会议室，集体培训一小时，带上笔记
+                    {notice}
                   </textarea>
                 </div>
               </div>
@@ -552,7 +552,7 @@ export default function ClockIn(props) {
             <Table
               pagination={false}
               columns={columns}
-              dataSource={data}
+              dataSource={clockInDataList}
               style={{
                 background: "rgb(1,13,37)",
               }}
@@ -564,12 +564,15 @@ export default function ClockIn(props) {
             <Form
               name="CardReplacement"
               style={{ padding: "10px", height: "100%", width: "100%" }}
+              // form={form}
+              onFinish={onFinish}
               {...formItemLayout}
             >
+              {console.log(1)}
               <Row>
                 <Col span={12}>
                   <Form.Item
-                    name="state"
+                    name="applicant"
                     label={<div style={{ color: "#fff" }}>申请人</div>}
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 10 }}
@@ -579,7 +582,7 @@ export default function ClockIn(props) {
                 </Col>
                 <Col span={12}>
                   <Form.Item
-                    name="name"
+                    name="place"
                     label={<div style={{ color: "#fff" }}>所属部门</div>}
                     labelCol={{ span: 6 }}
                     wrapperCol={{ span: 10 }}
@@ -588,7 +591,10 @@ export default function ClockIn(props) {
                   </Form.Item>
                 </Col>
               </Row>
-              <Form.Item label={<div style={{ color: "#fff" }}>请假说明</div>}>
+              <Form.Item
+                name="explain"
+                label={<div style={{ color: "#fff" }}>请假说明</div>}
+              >
                 <TextArea
                   rows={8}
                   style={{
@@ -596,12 +602,16 @@ export default function ClockIn(props) {
                   }}
                 />
               </Form.Item>
-              <Form.Item label={<div style={{ color: "#fff" }}>请假日期</div>}>
+              <Form.Item
+                name="date"
+                label={<div style={{ color: "#fff" }}>请假日期</div>}
+              >
                 <RangePicker style={{ width: "100%" }} />
               </Form.Item>
               <Row>
                 <Col span={12}>
                   <Form.Item
+                    name="reviewer"
                     label={<div style={{ color: "#fff" }}>审核人</div>}
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 10 }}

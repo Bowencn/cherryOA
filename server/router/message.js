@@ -44,8 +44,21 @@ router.get("/departmentReport", (req, res) => {
     },
   });
 });
-
+//笔记本
 router.post('/logBook',(req,res)=>{
+  console.log(req.body.id)
+  res.json({
+      code: 200,
+      data: {
+          message: "success",
+          entity: {
+            content: '销售一部午饭后集体去会议室，集体培训一小时，带上笔记'
+          }
+      }
+  })
+})
+//打卡通知
+router.post('/notice',(req,res)=>{
   console.log(req.body.id)
   res.json({
       code: 200,
