@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from "react";
 
-import {
-  Row,
-  Col,
-  Table,
-  Form,
-  Input,
-  Button,
-  Timeline,
-  Badge,
-  Skeleton,
-} from "antd";
+import { Row, Col, Table, Empty, Input, Button, Drawer, Skeleton } from "antd";
 import {
   FileTextOutlined,
   UploadOutlined,
   DownloadOutlined,
   FileZipOutlined,
   FileSearchOutlined,
+  DeploymentUnitOutlined,
+  FolderOutlined,
+  LaptopOutlined,
 } from "@ant-design/icons";
 import { Pie } from "@ant-design/charts";
 import axios from "axios";
 import conf from "../../server.conf";
+const { Search } = Input;
 export default function WorkingInformation() {
   const [informationDocument, setInformationDocument] = useState();
   const [negotiations, setNegotiations] = useState();
+  const [details, setDetails] = useState();
+  const [visible, setVisible] = useState();
   useEffect(() => {
     const informationDocument = async () => {
       const res = await axios.get(
@@ -34,9 +30,7 @@ export default function WorkingInformation() {
       // return res.data.data.entity;
     };
     const negotiations = async () => {
-      const res = await axios.get(
-        `${conf.address}/api/customer/negotiations`
-      );
+      const res = await axios.get(`${conf.address}/api/customer/negotiations`);
       console.log(res.data.data.list);
       setNegotiations(res.data.data.list);
       // return res.data.data.entity;
@@ -44,6 +38,115 @@ export default function WorkingInformation() {
     informationDocument();
     negotiations();
   }, []);
+  const uploadFile = (name) => {
+    let input = document.createElement("input");
+    input.type = "file";
+    input.click();
+    console.log(name);
+  };
+  const downloadFile = (name) => {
+    console.log(name);
+  };
+  const compressFile = (name) => {
+    let input = document.createElement("input");
+    input.type = "file";
+    input.click();
+    console.log(name);
+  };
+  const searchFile = (name) => {
+    setVisible(true);
+    console.log(name);
+  };
+  const onClose = () => {
+    setVisible(false);
+  };
+  const DataManagement = (item) => {
+    let name = item.name;
+    return (
+      <div
+        style={{
+          paddingLeft: 30,
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <div style={{ paddingLeft: 40 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              paddingBottom: 20,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                textAlign: "center",
+              }}
+              onClick={() => uploadFile(name)}
+            >
+              <UploadOutlined style={{ fontSize: 40, color: "#fff" }} />
+              <span style={{ color: "#fff", fontSize: 14 }}>上传文件</span>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                textAlign: "center",
+                paddingLeft: 40,
+              }}
+              onClick={() => downloadFile(name)}
+            >
+              <DownloadOutlined style={{ fontSize: 40, color: "#fff" }} />
+              <span style={{ color: "#fff", fontSize: 14 }}>下载文件</span>
+            </div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                textAlign: "center",
+              }}
+              onClick={() => compressFile(name)}
+            >
+              <FileZipOutlined style={{ fontSize: 40, color: "#fff" }} />
+              <span style={{ color: "#fff", fontSize: 14 }}>压缩文件</span>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                textAlign: "center",
+                paddingLeft: 40,
+              }}
+              onClick={() => searchFile(name)}
+            >
+              <FileSearchOutlined style={{ fontSize: 40, color: "#fff" }} />
+              <span style={{ color: "#fff", fontSize: 14 }}>搜索文件</span>
+            </div>
+          </div>
+        </div>
+        <div style={{ paddingLeft: 40, position: "relative" }}>
+          <Button
+            style={{
+              backgroundColor: "rgb(246,76,25)",
+              color: "#fff",
+              padding: "1px 10px",
+              borderRadius: 5,
+              border: 0,
+              position: "absolute",
+              top: "50%",
+              transform: "translateY(-50%)",
+            }}
+          >
+            查看
+          </Button>
+        </div>
+      </div>
+    );
+  };
   const Card = (config) => {
     return (
       <div
@@ -150,8 +253,68 @@ export default function WorkingInformation() {
   return (
     <div>
       <Row>
+        <Drawer
+          title={
+            <Search
+              placeholder="input search loading default"
+              onSearch={(value)=>{console.log(value)}}
+              // bordered={false}
+              loading={false}
+            />
+          }
+          placement={"right"}
+          closable={false}
+          onClose={onClose}
+          visible={visible}
+          key={"right"}
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Drawer>
         <Col span={7}>
-          {[1, 2, 3, 4].map((item) => (
+          {[
+            {
+              label: "部门资料",
+              name: "department",
+              icon: (
+                <FileTextOutlined
+                  style={{ fontSize: 88, color: "#fff", paddingTop: 20 }}
+                />
+              ),
+              color: "rgb(246,76,25)",
+            },
+            {
+              label: "客户资料",
+              name: "customer",
+              icon: (
+                <FolderOutlined
+                  style={{ fontSize: 88, color: "#fff", paddingTop: 20 }}
+                />
+              ),
+              color: "rgb(59, 155, 248)",
+            },
+            {
+              label: "共享资料",
+              name: "share",
+              icon: (
+                <DeploymentUnitOutlined
+                  style={{ fontSize: 88, color: "#fff", paddingTop: 20 }}
+                />
+              ),
+              color: "rgb(160, 35, 173)",
+            },
+            {
+              label: "工作资料",
+              name: "work",
+              icon: (
+                <LaptopOutlined
+                  style={{ fontSize: 88, color: "#fff", paddingTop: 20 }}
+                />
+              ),
+              color: "rgb(135, 34, 216)",
+            },
+          ].map((item) => (
             <div
               style={
                 item === 4
@@ -180,109 +343,18 @@ export default function WorkingInformation() {
                   width: 150,
                   height: 150,
                   borderRadius: 5,
-                  backgroundColor: "rgb(246,76,25)",
+                  backgroundColor: item.color,
                   textAlign: "center",
                   display: "flex",
                   flexDirection: "column",
                 }}
               >
-                <FileTextOutlined
-                  style={{ fontSize: 88, color: "#fff", paddingTop: 20 }}
-                />
-                <span style={{ color: "#fff", fontSize: 18 }}>部门资料</span>
+                {item.icon}
+                <span style={{ color: "#fff", fontSize: 18 }}>
+                  {item.label}
+                </span>
               </div>
-              <div
-                style={{
-                  paddingLeft: 30,
-                  display: "flex",
-                  flexDirection: "row",
-                }}
-              >
-                <div style={{ paddingLeft: 40 }}>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      paddingBottom: 20,
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        textAlign: "center",
-                      }}
-                    >
-                      <UploadOutlined style={{ fontSize: 40, color: "#fff" }} />
-                      <span style={{ color: "#fff", fontSize: 14 }}>
-                        上传文件
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        textAlign: "center",
-                        paddingLeft: 40,
-                      }}
-                    >
-                      <DownloadOutlined
-                        style={{ fontSize: 40, color: "#fff" }}
-                      />
-                      <span style={{ color: "#fff", fontSize: 14 }}>
-                        下载文件
-                      </span>
-                    </div>
-                  </div>
-                  <div style={{ display: "flex", flexDirection: "row" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        textAlign: "center",
-                      }}
-                    >
-                      <FileZipOutlined
-                        style={{ fontSize: 40, color: "#fff" }}
-                      />
-                      <span style={{ color: "#fff", fontSize: 14 }}>
-                        压缩文件
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        textAlign: "center",
-                        paddingLeft: 40,
-                      }}
-                    >
-                      <FileSearchOutlined
-                        style={{ fontSize: 40, color: "#fff" }}
-                      />
-                      <span style={{ color: "#fff", fontSize: 14 }}>
-                        搜索文件
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div style={{ paddingLeft: 40, position: "relative" }}>
-                  <Button
-                    style={{
-                      backgroundColor: "rgb(246,76,25)",
-                      color: "#fff",
-                      padding: "1px 10px",
-                      borderRadius: 5,
-                      border: 0,
-                      position: "absolute",
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                    }}
-                  >
-                    查看
-                  </Button>
-                </div>
-              </div>
+              <DataManagement name={item.name} />
             </div>
           ))}
         </Col>
@@ -394,6 +466,14 @@ export default function WorkingInformation() {
                 style={{
                   background: "rgb(1,13,37)",
                 }}
+                onRow={(record) => {
+                  return {
+                    onClick: (event) => {
+                      console.log(record);
+                      setDetails(record);
+                    },
+                  };
+                }}
                 // scroll={{ y: '100vh'}}
               />
             )}
@@ -407,64 +487,82 @@ export default function WorkingInformation() {
                   borderRadius: 10,
                 }}
               >
-                <div
-                  style={{
-                    height: 300,
-                  }}
-                >
+                {details ? (
                   <div
                     style={{
-                      borderBottom: "1px dashed #000",
-                      height: "30%",
-                      textAlign: "center",
+                      height: 300,
                     }}
                   >
-                    <span
-                      style={{ color: "#fff", fontSize: 18, lineHeight: 5 }}
-                    >
-                      姓名：穆端文
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      borderBottom: "1px dashed #000",
-                      height: "40%",
-                      display: "flex",
-                      flexDirection: "column",
-                      padding: "10px 30px",
-                    }}
-                  >
-                    <span
+                    <div
                       style={{
-                        color: "#fff",
-                        fontSize: 15,
-                        paddingBottom: 5,
-                        paddingTop: 5,
+                        borderBottom: "1px dashed #000",
+                        height: "30%",
+                        textAlign: "center",
                       }}
                     >
-                      联系情况：有意向
-                    </span>
-                    <span
-                      style={{ color: "#fff", fontSize: 15, paddingBottom: 5 }}
+                      <span
+                        style={{ color: "#fff", fontSize: 18, lineHeight: 5 }}
+                      >
+                        姓名：{details.name}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        borderBottom: "1px dashed #000",
+                        height: "40%",
+                        display: "flex",
+                        flexDirection: "column",
+                        padding: "10px 30px",
+                      }}
                     >
-                      考虑问题：售后服务
-                    </span>
-                    <span
-                      style={{ color: "#fff", fontSize: 15, paddingBottom: 5 }}
+                      <span
+                        style={{
+                          color: "#fff",
+                          fontSize: 15,
+                          paddingBottom: 5,
+                          paddingTop: 5,
+                        }}
+                      >
+                        联系情况：{details.details.contact}
+                      </span>
+                      <span
+                        style={{
+                          color: "#fff",
+                          fontSize: 15,
+                          paddingBottom: 5,
+                        }}
+                      >
+                        考虑问题：{details.details.question}
+                      </span>
+                      <span
+                        style={{
+                          color: "#fff",
+                          fontSize: 15,
+                          paddingBottom: 5,
+                        }}
+                      >
+                        交易方式：{details.details.TSTP}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        height: "30%",
+                        padding: "5px 30px",
+                        color: "#fff",
+                      }}
                     >
-                      交易方式：面谈
-                    </span>
+                      {details.details.remarks}
+                    </div>
                   </div>
-                  <div
+                ) : (
+                  <Empty
+                    image={Empty.PRESENTED_IMAGE_SIMPLE}
+                    imageStyle={{ height: 230 }}
                     style={{
-                      height: "30%",
-                      padding: "5px 30px",
-                      color: "#fff",
+                      height: 236,
                     }}
-                  >
-                    5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。
-                  </div>
-                </div>
+                  />
+                )}
               </div>
             </Col>
             <Col span={12} style={{ paddingLeft: 12 }}>
@@ -475,7 +573,7 @@ export default function WorkingInformation() {
                   borderRadius: 10,
                 }}
               >
-                {negotiations&&<Pie {...pieconfig} />}
+                {negotiations && <Pie {...pieconfig} />}
               </div>
             </Col>
           </Row>

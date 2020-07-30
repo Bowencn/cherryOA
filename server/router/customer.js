@@ -401,7 +401,7 @@ router.get("/volume", (req, res) => {
     code: 200,
     data: {
       message: "success",
-      list:  [
+      list: [
         {
           type: "一区",
           sales: 38,
@@ -430,7 +430,7 @@ router.get("/volume", (req, res) => {
           type: "七区",
           sales: 38,
         },
-      ]
+      ],
     },
   });
 });
@@ -441,7 +441,7 @@ router.get("/informationDocument", (req, res) => {
     code: 200,
     data: {
       message: "success",
-      list:[
+      list: [
         {
           key: "1",
           name: "John Brown",
@@ -449,6 +449,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "思瑶",
           RegionalScope: "成华区",
           sex: "男",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "2",
@@ -457,6 +464,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "王小天",
           RegionalScope: "云龙区",
           sex: "女",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "3",
@@ -465,6 +479,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "苏白",
           RegionalScope: "白虎区",
           sex: "女",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "4",
@@ -473,6 +494,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "思瑶",
           RegionalScope: "成华区",
           sex: "男",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "5",
@@ -481,6 +509,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "王小天",
           RegionalScope: "云龙区",
           sex: "女",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "6",
@@ -489,6 +524,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "苏白",
           RegionalScope: "白虎区",
           sex: "女",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "7",
@@ -497,6 +539,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "思瑶",
           RegionalScope: "成华区",
           sex: "男",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "8",
@@ -505,6 +554,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "王小天",
           RegionalScope: "云龙区",
           sex: "女",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "9",
@@ -513,6 +569,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "苏白",
           RegionalScope: "白虎区",
           sex: "女",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "10",
@@ -521,6 +584,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "思瑶",
           RegionalScope: "成华区",
           sex: "男",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "11",
@@ -529,6 +599,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "王小天",
           RegionalScope: "云龙区",
           sex: "女",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "12",
@@ -537,6 +614,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "苏白",
           RegionalScope: "白虎区",
           sex: "女",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "13",
@@ -545,6 +629,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "思瑶",
           RegionalScope: "成华区",
           sex: "男",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "14",
@@ -553,6 +644,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "王小天",
           RegionalScope: "云龙区",
           sex: "女",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "15",
@@ -561,6 +659,13 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "苏白",
           RegionalScope: "白虎区",
           sex: "女",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
         {
           key: "16",
@@ -569,8 +674,15 @@ router.get("/informationDocument", (req, res) => {
           executiveDirector: "思瑶",
           RegionalScope: "成华区",
           sex: "男",
+          details: {
+            contact: "有意向",
+            question: "售后服务",
+            TSTP: "面谈",
+            remarks:
+              "5月1日通过会议的方式联系客户，咨询客户对产品的意向程度，客户称需要时间考虑，问家人商量的过后答复，合作几率大幅在90%以上。",
+          },
         },
-      ]
+      ],
     },
   });
 });
@@ -580,7 +692,7 @@ router.get("/negotiations", (req, res) => {
     code: 200,
     data: {
       message: "success",
-      list:  [
+      list: [
         {
           type: "有意向客户",
           value: 15,
@@ -593,7 +705,7 @@ router.get("/negotiations", (req, res) => {
           type: "合作客户",
           value: 25,
         },
-      ]
+      ],
     },
   });
 });
